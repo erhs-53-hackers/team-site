@@ -305,3 +305,10 @@ input {
 	padding: 6px;
 	margin-bottom: 10px;
 }*/
+.button {
+	padding: 5px;
+	background-color: #000305;
+	color: #00ff00;
+	background: #000305;
+	font-size: 1.517em;
+}
