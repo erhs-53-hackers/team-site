@@ -59,6 +59,12 @@ class LoginHandler(Handler):
                 self.render('login.html',username=username, error = "invalid password")
         else:
             self.render('login.html',username=username, error = "invalid login")
+
+class LogoutHandler(Handler):
+    def get(self):
+        self.response.headers.add_header('Set-Cookie', 'user_id=; Path=/')
+        self.redirect("/login")
+
             
 class AdminHandler(Handler):
      def get(self):        
@@ -127,6 +133,7 @@ class AdminHandler(Handler):
 
 app = webapp2.WSGIApplication([('/blog', BlogHandler),
                                ('/login', LoginHandler),
+                               ('/logout', LogoutHandler)
                                ('/admin', AdminHandler),
                                ('/', MainHandler)],
                               debug=True)

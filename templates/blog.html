@@ -19,7 +19,7 @@
 	
 	<body id="index" class="home">
 		{% if user %}
-		<div align="right">{{user}}</div>
+		<div align="right">{{user}}(<a href="/logout">logout</a>)</div>
 		{% else %}
 		<div align="right"><a href="/login">User Login</a></div>
 		{% endif %}
