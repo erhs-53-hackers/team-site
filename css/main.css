@@ -162,7 +162,7 @@ border-radius: 10px;
 -webkit-border-radius: 10px; }  
 
 #featured figure { 
-border: 2px solid #eee; 
+/*border: 2px solid #eee;*/ /* temp remove border */
 float: right; 
 margin: 0.786em 2em 0 5em; width: 248px; } 
 #featured figure img {display: block; float: right;}  
