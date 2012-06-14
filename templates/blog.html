@@ -51,9 +51,15 @@
 		
 		{% for post in posts%}
 		<section id="content" class="body">
+			{% if user %}
+			<form method="POST" action="/delete">
+				<input type="hidden" name="post" value="{{post.key().id()}}">
+				<input align="right" id="remove-button" type="submit" value="X">
+			</form>
+			{% endif %}
 			<h1>{{post.subject}}</h1><br>
 			Created by: {{post.username}}<br>
-			Date: {{post.created}}			
+			Date: {{post.created}}
 			<hr>
 			{{post.content}}			
 		</section><!-- /#content -->
