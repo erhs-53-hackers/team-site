@@ -18,6 +18,11 @@
 	</head>
 	
 	<body id="index" class="home">
+		{% if user %}
+		<div align="right">{{user}}</div>
+		{% else %}
+		<div align="right"><a href="/login">User Login</a></div>
+		{% endif %}
 	
 		<header id="banner" class="body">
 			<h1><a href="#">Area 53! <strong> The Cow Abductors
@@ -28,6 +33,7 @@
 				<li><a href="#">about</a></li>
 				<li class="active"><a href="/blog">blog</a></li>
 				<li><a href="#">contact</a></li>
+				<li><a href="/admin">admin</a></li>
 			</ul></nav>
 			
 		</header><!-- /#banner -->

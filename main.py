@@ -12,15 +12,36 @@ import json
 import logging
 import datetime
 
+
+class MainHandler(Handler):
+    def get(self):
+        cookie = self.request.cookies.get("user_id")
+        user = authenticate_cookie(cookie)
+        if user:
+            user = User.get_by_id(int(user))
+            user = user.username
+        
+        
+        self.render("index.html", user = user)
 class BlogHandler(Handler):
-    def get(self):  
+    def get(self):
+        cookie = self.request.cookies.get("user_id")
+        user = authenticate_cookie(cookie)
+        if user:
+            user = User.get_by_id(int(user))
+            user = user.username  
         #user = User(username="admin", password=make_pw_hash('admin', 'admin1234'), isadmin=True)
         #user.put()      
-        self.render("blog.html")
+        self.render("blog.html", user = user)
         
 class LoginHandler(Handler):
      def get(self):
-        self.render('login.html')
+        cookie = self.request.cookies.get("user_id")
+        user = authenticate_cookie(cookie)
+        if user:
+            user = User.get_by_id(int(user))
+            user = user.username
+        self.render('login.html', user = user)
 
      def post(self):
         username = self.request.get('username')
@@ -40,12 +61,13 @@ class LoginHandler(Handler):
             self.render('login.html',username=username, error = "invalid login")
             
 class AdminHandler(Handler):
-     def get(self):
+     def get(self):        
         cookie = self.request.cookies.get("user_id")
         user = authenticate_cookie(cookie)
         if user: user = User.get_by_id(int(user))
-        if user and user.isadmin:
-            self.render("admin.html")
+        if user and user.isadmin:           
+            user = user.username            
+            self.render("admin.html", user = user)
         else:
             self.redirect("/login")
 
@@ -105,5 +127,6 @@ class AdminHandler(Handler):
 
 app = webapp2.WSGIApplication([('/blog', BlogHandler),
                                ('/login', LoginHandler),
-                                ('/admin', AdminHandler)],
+                               ('/admin', AdminHandler),
+                               ('/', MainHandler)],
                               debug=True)
