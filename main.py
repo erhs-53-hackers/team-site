@@ -124,6 +124,32 @@ class AdminHandler(Handler):
                             verify = m_verify,
                             mail = email)
 
+class NewpostHandler(Handler):
+    def render_form(self, subject="", content="", error="",user=None):
+        self.render("newpost.html", subject=subject, content=content, error=error, user=user)
+    def get(self):
+        cookie = self.request.cookies.get("user_id")
+        user = authenticate_cookie(cookie)
+        if user: 
+            user = User.get_by_id(int(user))
+            self.render_form(user = user.username)
+        else:
+            self.redirect("/login")
+
+    def post(self):
+        cookie = self.request.cookies.get("user_id")
+        user = authenticate_cookie(cookie)
+        if user: 
+            user = User.get_by_id(int(user))
+            subject = self.request.get("subject")
+            content = self.request.get("content")
+
+            if subject and content:
+                post = Post(subject=subject, content=content, username = user.username)            
+                post.put()                
+            else:
+                self.render_form(subject, content, "Please provide a title and content", user=user.username)
+
 
     
         
@@ -135,5 +161,6 @@ app = webapp2.WSGIApplication([('/blog', BlogHandler),
                                ('/login', LoginHandler),
                                ('/logout', LogoutHandler),
                                ('/admin', AdminHandler),
+                               ('/newpost', NewpostHandler),
                                ('/', MainHandler)],
                               debug=True)
