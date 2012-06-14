@@ -40,13 +40,24 @@
 			</ul></nav>
 			
 		</header><!-- /#banner -->
-		
+		{% if user %}
 		<section id="content" class="body">
 			<form action="/newpost" method="GET">
 				<button class="button" id="submit">New Post</button>
 			</form>
 			
 		</section><!-- /#content -->
+		{% endif %}
+		
+		{% for post in posts%}
+		<section id="content" class="body">
+			<h1>{{post.subject}}</h1><br>
+			Created by: {{post.username}}<br>
+			Date: {{post.created}}			
+			<hr>
+			{{post.content}}			
+		</section><!-- /#content -->
+		{% endfor %}
 	
 		
 		

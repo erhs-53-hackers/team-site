@@ -31,8 +31,9 @@ class BlogHandler(Handler):
             user = User.get_by_id(int(user))
             user = user.username  
         #user = User(username="admin", password=make_pw_hash('admin', 'admin1234'), isadmin=True)
-        #user.put()      
-        self.render("blog.html", user = user)
+        #user.put()
+        posts = db.GqlQuery("SELECT * FROM Post ORDER BY created DESC")      
+        self.render("blog.html", user = user, posts = posts)
         
 class LoginHandler(Handler):
      def get(self):
@@ -146,7 +147,8 @@ class NewpostHandler(Handler):
 
             if subject and content:
                 post = Post(subject=subject, content=content, username = user.username)            
-                post.put()                
+                post.put()
+                self.redirect("/blog")              
             else:
                 self.render_form(subject, content, "Please provide a title and content", user=user.username)
 
