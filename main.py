@@ -157,14 +157,19 @@ class DeletepostHandler(Handler):
         user = authenticate_cookie(cookie)        
         if user:
             post = self.request.get("post")
-            post = get_user(post)
+            post = Post.get_by_id(int(post))
             if post:
                 post.delete()
         self.redirect("/blog")
         
 class CalendarHandler(Handler):
     def get(self):
-        self.render("calendar.html")        
+        cookie = self.request.cookies.get("user_id")
+        user = authenticate_cookie(cookie)        
+        if user: 
+            user = get_user(user).username
+            
+        self.render("calendar.html", user = user)        
 
 app = webapp2.WSGIApplication([('/blog', BlogHandler),
                                ('/login', LoginHandler),
