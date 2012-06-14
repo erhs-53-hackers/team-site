@@ -6,7 +6,6 @@ from cookie import *
 from password import *
 from handlerbase import Handler
 from google.appengine.ext import db
-from google.appengine.api import memcache
 from database import *
 import json
 import logging
@@ -18,7 +17,7 @@ class MainHandler(Handler):
         cookie = self.request.cookies.get("user_id")
         user = authenticate_cookie(cookie)
         if user:
-            user = User.get_by_id(int(user))
+            user = get_user(user)
             user = user.username
         
         
@@ -28,7 +27,7 @@ class BlogHandler(Handler):
         cookie = self.request.cookies.get("user_id")
         user = authenticate_cookie(cookie)
         if user:
-            user = User.get_by_id(int(user))
+            user = get_user(user)
             user = user.username  
         #user = User(username="admin", password=make_pw_hash('admin', 'admin1234'), isadmin=True)
         #user.put()
@@ -40,7 +39,7 @@ class LoginHandler(Handler):
         cookie = self.request.cookies.get("user_id")
         user = authenticate_cookie(cookie)
         if user:
-            user = User.get_by_id(int(user))
+            user = get_user(user)
             user = user.username
         self.render('login.html', user = user)
 
@@ -71,7 +70,7 @@ class AdminHandler(Handler):
      def get(self):        
         cookie = self.request.cookies.get("user_id")
         user = authenticate_cookie(cookie)
-        if user: user = User.get_by_id(int(user))
+        if user: user = get_user(user)
         if user and user.isadmin:           
             user = user.username            
             self.render("admin.html", user = user)
@@ -81,7 +80,7 @@ class AdminHandler(Handler):
      def post(self):
         cookie = self.request.cookies.get("user_id")
         user = authenticate_cookie(cookie)
-        if user: user = User.get_by_id(int(user))
+        if user: user = get_user(user)
         if user and user.isadmin:
             username = self.request.get('username')
             password = self.request.get('password')
@@ -132,7 +131,7 @@ class NewpostHandler(Handler):
         cookie = self.request.cookies.get("user_id")
         user = authenticate_cookie(cookie)
         if user: 
-            user = User.get_by_id(int(user))
+            user = get_user(user)
             self.render_form(user = user.username)
         else:
             self.redirect("/login")
@@ -141,7 +140,7 @@ class NewpostHandler(Handler):
         cookie = self.request.cookies.get("user_id")
         user = authenticate_cookie(cookie)
         if user: 
-            user = User.get_by_id(int(user))
+            user = get_user(user)
             subject = self.request.get("subject")
             content = self.request.get("content")
 
