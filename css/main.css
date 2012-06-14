@@ -158,8 +158,8 @@ overflow: hidden;
 padding: 20px; 
 width: 760px;  
 border-radius: 10px; 
--moz-border-radius: 10px; -
-webkit-border-radius: 10px; }  
+-moz-border-radius: 10px; 
+-webkit-border-radius: 10px; }  
 
 #featured figure { 
 border: 2px solid #eee; 
@@ -323,5 +323,14 @@ input {
 .remove-button:hover {
 	color:#FF001E;	
 }
-	
+
+#admin-login { 
+background: #000305; 
+margin-bottom: 2em; 
+overflow: hidden; 
+padding: 20px 20px; 
+width: 760px;  
+border-radius: 10px; 
+-moz-border-radius: 10px; 
+-webkit-border-radius: 10px; }
 	
