@@ -51,7 +51,9 @@
 		
 		{% for post in posts%}
 		<section id="content" class="body">
-			<h1>{{post.subject}}</h1>
+			<h1>{{post.subject}}</h1><br>
+			Created by: {{post.username}}<br>
+			Date: {{post.created}}			
 			<hr>
 			{{post.content}}			
 		</section><!-- /#content -->
