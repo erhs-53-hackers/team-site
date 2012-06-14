@@ -133,7 +133,7 @@ class AdminHandler(Handler):
 
 app = webapp2.WSGIApplication([('/blog', BlogHandler),
                                ('/login', LoginHandler),
-                               ('/logout', LogoutHandler)
+                               ('/logout', LogoutHandler),
                                ('/admin', AdminHandler),
                                ('/', MainHandler)],
                               debug=True)
