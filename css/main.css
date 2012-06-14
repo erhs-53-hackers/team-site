@@ -275,4 +275,27 @@ padding-bottom: 2em; text-align: right;}
 
 #posts-list .hentry:hover { background: #C64350; color: #fff; } #posts-list .hentry:hover a:link, #posts-list .hentry:hover a:visited { color: #F6CF74; text-shadow: 1px 1px 1px #333; }
 
-
+/* Login *****************/
+form {
+	width: 100%;
+	/*
+	padding: 20px;
+	
+	/*
+	border: none;
+	text-align: right;
+	
+	/*
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	
+	-moz-box-shadow:0px -5px 300px #270644
+	-webkit-box-shadow:0px -5px 300px #270644;
+	*/
+}/*
+input {
+	width: 230px;
+	background: #000305;
+	padding: 6px;
+	margin-bottom: 10px;
+}*/
