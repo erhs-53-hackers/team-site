@@ -312,14 +312,16 @@ input {
 	background: #000305;
 	font-size: 1.517em;
 }
-#remove-button {
-	padding: 5px;
+.remove-button {
+	width: 20px;
+	height: 20px;
+	padding: 0px;
+	padding-top: 1px;
 	background-color: #000305;
-	color: #CD0000;
+	color: #9E0517;
 }
-#remove-button  :hover {
-	color:#FF0000;
-	text-align: right;
+.remove-button:hover {
+	color:#FF001E;	
 }
 	
 	
