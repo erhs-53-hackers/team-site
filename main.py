@@ -41,22 +41,25 @@ class LoginHandler(Handler):
         if user:
             user = get_user(user)
             user = user.username
-        self.render('login.html', user = user)
+        self.render('login.html', user = user, remember = "false")
 
      def post(self):
         username = self.request.get('username')
         password = self.request.get('password')
-
-        user = db.GqlQuery('SELECT * FROM User WHERE username=:1 LIMIT 1', username)
+        remember = self.request.get('remember')       
         
+
+        user = db.GqlQuery('SELECT * FROM User WHERE username=:1 LIMIT 1', username)        
 
         if user.count() > 0 :
             if valid_pw(username, password, user[0].password):
                 user_id = make_secure_val(str(user[0].key().id()))
-                self.response.headers.add_header('Set-Cookie', 'user_id=%s' % user_id)
+                header ="user_id=%s" % user_id
+                if remember == "true": header += "; expires=Wednesday, 01-Aug-2040 08:00:00 GMT"
+                self.response.headers.add_header('Set-Cookie', header)
                 self.redirect('/')
             else:
-                self.render('login.html',username=username, error = "invalid password")
+                self.render('login.html',username=username, error = "invalid password", remember=remember)
         else:
             self.render('login.html',username=username, error = "invalid login")
 
