@@ -2,7 +2,7 @@
 
 /* Imports */ 
 @import url("reset.css"); 
-@import url("global-forms.css");  
+/**@import url("global-forms.css");  */
 
 /***** Global *****/ 
 
@@ -271,9 +271,15 @@ text-decoration: none;}
 #contentinfo {
 padding-bottom: 2em; text-align: right;}
 
-/* Blog */ .hentry { border-bottom: 1px solid #eee; padding: 1.5em 0; } li:last-child .hentry, #content > .hentry {border: 0; margin: 0;} #content > .hentry {padding: 1em 0;}  .entry-title {font-size: 1.429em; margin-bottom: 0;} .entry-title a:link, .entry-title a:visited {text-decoration: none;}  .hentry .post-info * {font-style: normal;}  /* Content */ .hentry footer {margin-bottom: 2em;} .hentry footer address {display: inline;} #posts-list footer address {display: block;}  /* Blog Index */ #posts-list {list-style: none; margin: 0;} #posts-list .hentry {padding-left: 200px; position: relative;} #posts-list footer { left: 10px; position: absolute; top: 1.5em; width: 190px; }
+/* Blog */ 
+.hentry { 
+border-bottom: 1px solid #eee; padding: 1.5em 0; } li:last-child .hentry, #content > .hentry {border: 0; margin: 0;} #content > .hentry {padding: 1em 0;}  .entry-title {font-size: 1.429em; margin-bottom: 0;} .entry-title a:link, .entry-title a:visited {text-decoration: none;}  .hentry .post-info * {font-style: normal;}  /* Content */ .hentry footer {margin-bottom: 2em;} .hentry footer address {display: inline;} #posts-list footer address {display: block;}  /* Blog Index */ #posts-list {list-style: none; margin: 0;} #posts-list .hentry {padding-left: 200px; position: relative;} #posts-list footer { left: 10px; position: absolute; top: 1.5em; width: 190px; }
 
-#posts-list .hentry:hover { background: #C64350; color: #fff; } #posts-list .hentry:hover a:link, #posts-list .hentry:hover a:visited { color: #F6CF74; text-shadow: 1px 1px 1px #333; }
+#posts-list .hentry:hover {
+ background: none; 
+ color: #fff; } 
+ #posts-list .hentry:hover a:link, #posts-list .hentry:hover a:visited { 
+ text-shadow: 1px 1px 1px #333; }
 
 /* Login *****************/
 form {
