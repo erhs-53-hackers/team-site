@@ -122,7 +122,7 @@ border-bottom-left-radius: 5px;
 
 /* Featured *****************/ 
 #featured { 
-background: #fff; 
+background: #000305; 
 margin-bottom: 2em; 
 overflow: hidden; 
 padding: 20px; 
@@ -138,16 +138,72 @@ margin: 0.786em 2em 0 5em; width: 248px; }
 #featured figure img {display: block; float: right;}  
 
 #featured h2 {
-color: #C74451; 
+color: #660000; 
+text-decoration: underline;
 font-size: 1.714em; 
 margin-bottom: 0.333em;} 
 
 #featured h3 {font-size: 1.429em; margin-bottom: .5em;}
 
 #featured h3 a:link, #featured h3 a:visited {
-color: #000305; text-decoration: none;} #featured h3 a:hover, #featured h3 a:active {color: #fff;}  /* Body *****************/ #content { background: #fff; margin-bottom: 2em; overflow: hidden; padding: 20px 20px; width: 760px;  border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; }
+color: #00FF00; 
+text-decoration: none;} 
 
-/* Extras *****************/ #extras {margin: 0 auto 3em auto; overflow: hidden;}  #extras ul {list-style: none; margin: 0;} #extras li {border-bottom: 1px solid #fff;} #extras h2 { color: #C74350; font-size: 1.429em; margin-bottom: .25em; padding: 0 3px; }  #extras a:link, #extras a:visited { color: #444; display: block; border-bottom: 1px solid #F4E3E3; text-decoration: none; padding: .3em .25em; }  /* Blogroll */ #extras .blogroll { float: left; width: 615px; }  #extras .blogroll li {float: left; margin: 0 20px 0 0; width: 185px;}  /* Social */ #extras .social { float: right; width: 175px; }
+#featured h3 a:hover, #featured h3 a:active {
+color: #00AA00;
+background: none;}  
+
+/* Body *****************/ 
+#content { 
+background: #000305; 
+margin-bottom: 2em; 
+overflow: hidden; 
+padding: 20px 20px; 
+width: 760px;  
+border-radius: 10px; 
+-moz-border-radius: 10px; 
+-webkit-border-radius: 10px; }
+
+#content a {
+background: none;}
+
+#cotent p {
+background: none;} /* Doesn't work */
+
+/* Extras *****************/ 
+#extras {
+margin: 0 auto 3em auto; 
+overflow: hidden;}  
+
+#extras ul {
+list-style: none; 
+margin: 0;} 
+#extras li {
+border-bottom: 1px solid #fff;} 
+
+#extras h2 { 
+color: #00FF00; 
+font-size: 1.429em; 
+margin-bottom: .25em; 
+padding: 0 3px; }
+  
+#extras a:link, #extras a:visited { 
+color: #fff; 
+display: block; 
+border-bottom: 1px solid #F4E3E3; 
+text-decoration: none; 
+padding: .3em .25em; }  
+
+/* Blogroll */ 
+#extras .blogroll { 
+float: left; 
+width: 615px; }  
+#extras .blogroll li {float: left; margin: 0 20px 0 0; width: 185px;}  
+
+/* Social */ 
+#extras .social { 
+float: right; 
+width: 175px; }
 
 #extras li:last-child, /* last <li>*/ #extras li:last-child a /* <a> of last <li> */ {border: 0}
 
