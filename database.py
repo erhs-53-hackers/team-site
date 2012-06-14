@@ -1,4 +1,13 @@
 from google.appengine.ext import db
+from google.appengine.api import memcache
+
+def get_user(num):
+    user = memcache.get(str(num))
+    if not user:
+        user = User.get_by_id(int(num))
+        if user:
+            memcache.set(str(num), user)
+    return user
 
 class Post(db.Model):
     username = db.StringProperty(required = True)
