@@ -152,17 +152,16 @@ class NewpostHandler(Handler):
             else:
                 self.render_form(subject, content, "Please provide a title and content", user=user.username)
 
-def DeletepostHandler(Handler):
+class DeletepostHandler(Handler):    
     def post(self):
-        self.response.out.write("yo")
-        #cookie = self.request.cookies.get("user_id")
-        #user = authenticate_cookie(cookie)        
-        #if user:
-        #    post = self.request.get("post")
-        #    post = Post.get_by_id(int(post))
-        #    if post:
-        #        post.delete()
-        #self.redirect("/blog")
+        cookie = self.request.cookies.get("user_id")
+        user = authenticate_cookie(cookie)        
+        if user:
+            post = self.request.get("post")
+            post = Post.get_by_id(int(post))
+            if post:
+                post.delete()
+        self.redirect("/blog")
         
         
         
@@ -177,6 +176,6 @@ app = webapp2.WSGIApplication([('/blog', BlogHandler),
                                ('/logout', LogoutHandler),
                                ('/admin', AdminHandler),
                                ('/newpost', NewpostHandler),
-                               ('/delete', DeletepostHandler),
+                               ('/_deletepost', DeletepostHandler),
                                ('/', MainHandler)],
                               debug=True)

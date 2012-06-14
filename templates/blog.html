@@ -52,7 +52,7 @@
 		{% for post in posts%}
 		<section id="content" class="body">
 			{% if user %}
-			<form method="POST" action="/delete">
+			<form method="POST" action="/_deletepost">
 				<input type="hidden" name="post" value="{{post.key().id()}}">
 				<input align="right" id="remove-button" type="submit" value="X">
 			</form>
