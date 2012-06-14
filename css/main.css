@@ -319,6 +319,7 @@ input {
 }
 #remove-button  :hover {
 	color:#FF0000;
+	text-align: right;
 }
 	
 	
