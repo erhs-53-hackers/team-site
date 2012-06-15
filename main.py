@@ -12,6 +12,7 @@ import logging
 import datetime
 
 
+
 class MainHandler(Handler):
     def get(self):
         cookie = self.request.cookies.get("user_id")
@@ -148,7 +149,7 @@ class NewpostHandler(Handler):
             content = self.request.get("content")
 
             if subject and content:
-                post = Post(subject=subject, content=content, username = user.username)            
+                post = Post(subject=subject, content=content, username = user.username, user = user.key().id())            
                 post.put()
                 self.redirect("/blog")              
             else:
@@ -165,6 +166,47 @@ class DeletepostHandler(Handler):
                 post.delete()
         self.redirect("/blog")
         
+class EditPostHandler(Handler):
+    def get(self, resource):
+        cookie = self.request.cookies.get("user_id")
+        user = authenticate_cookie(cookie)        
+        if user: user = get_user(user).username
+        post = Post.get_by_id(int(resource))
+        post_user = None      
+        if post: post_user = post.username
+        
+        if user == post_user:
+            self.render("newpost.html", user = user, 
+                                        subject=post.subject, 
+                                        content=post.content)
+        else:
+            self.redirect('/login')
+            
+    def post(self, ID):
+        cookie = self.request.cookies.get("user_id")
+        user = authenticate_cookie(cookie)        
+        if user: user = get_user(user).username
+        post = Post.get_by_id(int(ID))
+        post_user = None      
+        if post: post_user = post.username
+        
+        if user == post_user:            
+            subject = self.request.get("subject")
+            content = self.request.get("content")            
+
+            if subject and content:                
+                post.subject = subject
+                post.content = content        
+                post.put()
+                self.redirect("/blog")              
+            else:
+                self.render_form(subject, content, "Please provide a title and content", user=user)
+        
+        
+        
+
+
+        
 class CalendarHandler(Handler):
     def get(self):
         cookie = self.request.cookies.get("user_id")
@@ -172,14 +214,15 @@ class CalendarHandler(Handler):
         if user: 
             user = get_user(user).username
             
-        self.render("calendar.html", user = user)        
+        self.render("calendar.html", user = user)
 
-app = webapp2.WSGIApplication([('/blog', BlogHandler),
+app = webapp2.WSGIApplication([('/', MainHandler),
+                               ('/blog', BlogHandler),
                                ('/login', LoginHandler),
                                ('/logout', LogoutHandler),
                                ('/admin', AdminHandler),
                                ('/newpost', NewpostHandler),
-                               ('/_deletepost', DeletepostHandler),
-                               ('/', MainHandler),
+                               ('/deletepost', DeletepostHandler),
+                               ('/editpost/(\d+)', EditPostHandler),
                                ('/calendar', CalendarHandler)],
                               debug=True)

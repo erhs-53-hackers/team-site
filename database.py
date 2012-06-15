@@ -11,6 +11,7 @@ def get_user(num):
 
 class Post(db.Model):
     username = db.StringProperty(required = True)
+    user     = db.IntegerProperty()
     subject  = db.StringProperty(required = True)
     content  = db.TextProperty(required = True)
     created  = db.DateTimeProperty(auto_now_add = True)

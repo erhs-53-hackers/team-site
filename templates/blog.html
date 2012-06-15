@@ -52,7 +52,10 @@
 		{% for post in posts%}
 		<section id="content" class="body">
 			{% if user %}
-			<form method="POST" action="/_deletepost">
+			{% if user == post.username%}
+			<a href="/editpost/{{post.key().id()}}">edit</a>
+			{% endif %}
+			<form method="POST" action="/deletepost">
 				<input type="hidden" name="post" value="{{post.key().id()}}">
 				<p align="right"><input class="remove-button" type="submit" value="X"></p>
 			</form>
@@ -61,7 +64,7 @@
 			Created by: {{post.username}}<br>
 			Date: {{post.created}}
 			<hr>
-			{{post.content}}			
+			<pre>{{post.content}}</pre>			
 		</section><!-- /#content -->
 		{% endfor %}
 	
