@@ -273,7 +273,37 @@ padding-bottom: 2em; text-align: right;}
 
 /* Blog */ 
 .hentry { 
-border-bottom: 1px solid #eee; padding: 1.5em 0; } li:last-child .hentry, #content > .hentry {border: 0; margin: 0;} #content > .hentry {padding: 1em 0;}  .entry-title {font-size: 1.429em; margin-bottom: 0;} .entry-title a:link, .entry-title a:visited {text-decoration: none;}  .hentry .post-info * {font-style: normal;}  /* Content */ .hentry footer {margin-bottom: 2em;} .hentry footer address {display: inline;} #posts-list footer address {display: block;}  /* Blog Index */ #posts-list {list-style: none; margin: 0;} #posts-list .hentry {padding-left: 200px; position: relative;} #posts-list footer { left: 10px; position: absolute; top: 1.5em; width: 190px; }
+border-bottom: 1px solid #eee; 
+padding: 1.5em 0; } 
+li:last-child .hentry, #content > .hentry {border: 0; margin: 0;} 
+#content > .hentry {padding: 1em 0;}  
+.entry-title {
+font-size: 1.429em; 
+margin-bottom: 0;} 
+.entry-title a:link, .entry-title a:visited {
+text-decoration: none;}  
+.hentry .post-info * {font-style: normal;}  
+/* Content */ .hentry footer {margin-bottom: 2em;} .hentry footer address {display: inline;} #posts-list footer address {display: block;}  /* Blog Index */ #posts-list {list-style: none; margin: 0;} #posts-list .hentry {padding-left: 200px; position: relative;} #posts-list footer { left: 10px; position: absolute; top: 1.5em; width: 190px; }
+
+#posts-list .hentry:hover {
+ background: none; 
+ color: #fff; } 
+ #posts-list .hentry:hover a:link, #posts-list .hentry:hover a:visited { 
+ text-shadow: 1px 1px 1px #333; }
+
+/* About Page */
+.about-entry { 
+border-bottom: 1px solid #eee; 
+padding: 1.5em 0; } 
+li:last-child .about-entry, #content > .about-entry {border: 0; margin: 0;} 
+#content > .about-entry {padding: 1em 0;}  
+.entry-title {
+font-size: 1.429em; 
+margin-bottom: 0;} 
+.entry-title a:link, .entry-title a:visited {
+text-decoration: none;}  
+.about-entry .post-info * {font-style: normal;}  
+/* Content */ /* Blog Index */ #posts-list {list-style: none; margin: 0;} #posts-list .about-entry {padding-left: 0px; position: relative;}
 
 #posts-list .hentry:hover {
  background: none; 
