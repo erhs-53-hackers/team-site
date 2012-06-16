@@ -208,6 +208,16 @@ class CalendarHandler(Handler):
             user = get_user(user).username
             
         self.render("calendar.html", user = user)
+        
+class AboutHandler(Handler):
+    def get(self):
+        cookie = self.request.cookies.get("user_id")
+        user = authenticate_cookie(cookie)        
+        if user: 
+            user = get_user(user).username
+            
+        self.render("about.html", user = user)
+        
 
 app = webapp2.WSGIApplication([('/', MainHandler),
                                ('/blog', BlogHandler),
@@ -217,5 +227,6 @@ app = webapp2.WSGIApplication([('/', MainHandler),
                                ('/members', MembersHandler),
                                ('/deletepost', DeletepostHandler),
                                ('/editpost/(\d+)', EditPostHandler),
-                               ('/calendar', CalendarHandler)],
+                               ('/calendar', CalendarHandler),
+                               ('/about', AboutHandler)],
                               debug=True)
