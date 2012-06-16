@@ -21,3 +21,5 @@ class User(db.Model):
     password = db.StringProperty(required = True)
     email    = db.StringProperty()
     isadmin  = db.BooleanProperty(required = True)
+
+    

@@ -4,9 +4,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title> Welcome to Area 53 </title>
-		<link rel="stylesheet" href="../css/main.css" type="text/css" />	
-
-		
+		<link rel="stylesheet" href="css/main.css" type="text/css" />
 		
 		<!--[if IE]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
@@ -17,13 +15,11 @@
 		<!--[if lt IE 7]>
 		<link rel="stylesheet" type="text/css" media="all" href="css/ie6.css"/>
 		<![endif]-->
-		
-		
 	</head>
 	
 	<body id="index" class="home">
-		{% if user %}
-		<div align="right">{{user}}(<a href="/logout">logout</a>)</div>
+		{% if user.username %}
+		<div align="right">{{user.username}}(<a href="/logout">logout</a>)</div>
 		{% else %}
 		<div align="right"><a href="/login">User Login</a></div>
 		{% endif %}
@@ -39,50 +35,88 @@
 				<li><a href="#">contact</a></li>
 				<li><a href="#">sponsors</a></li>
 				<li><a href="/calendar">calendar</a></li>
-				<li><a href="/members">members</a></li>
+				<li class="active"><a href="/members">members</a></li>
 			</ul></nav>
 			
 		</header><!-- /#banner -->
-		
-		<section id="content" class="body">
+		{% if user.isadmin %}
+		<section id="admin-login" class="body">
+			<h1>Create User</h1>
 			<form method="post">
-			<label>
-				<div>Subject</div>
-				<input type="text" value="{{subject}}" name="subject">
-			</label>
-			<label>
-				<div>Content</div>
-				<textarea style="width:100%;height:200px" name="content">{{content}}</textarea>
-			</label>
-			<div class="error">{{error}}</div>
+			<table>
+				<tr>
+				  <td class="label">
+					Username
+				  </td>
+				  <td>
+					<input type="text" name="username" value="{{name}}">
+				  </td>
+				  <td>
+					{{username}}
+				  </td>
+				</tr>
+
+				<tr>
+				  <td class="label">
+					Password
+				  </td>
+				  <td>
+					<input type="password" name="password" value="">
+				  </td>
+				  <td>
+					{{password}}
+				  </td>
+				</tr>
+
+				<tr>
+				  <td class="label">
+					Verify Password
+				  </td>
+				  <td>
+					<input type="password" name="verify" value="">
+				  </td>
+				  <td>
+					{{verify}}
+				  </td>
+				</tr>
+
+				<tr>
+				  <td class="label">
+					Email (optional)
+				  </td>
+				  <td>
+					<input type="text" name="email" value="{{mail}}">
+				  </td>
+				  <td>
+					{{email}}
+				  </td>
+				</tr>
+			</table>
+
 			<input type="submit">
-			</form>	
+			</form>
 			
 		</section><!-- /#content -->
-	
-		
-		
+		{% endif %}	
 		<footer id="contentinfo" class="body">
 			<address id="about" class="vcard body">
+			
 			<span class="primary">
-			<strong><a href="#" class="fn url">Area 53, FRC Team 53</a></strong>
-			
-			<span class="role">The Cow Abductors"</span>
+			<strong><a href="#" class="fn url">Area 53</a></strong>
+			<span class="role">The Cow Abductors</span>
 			</span><!-- /.primary -->
-			
-			<img src="#tbd" alt="Cow Abduction Pic" class="photo" />
-			
+						
 			<span class="bio">The Area 53 Cow Abductors website offers 
 			information to team members, mentors, parents, and the 
 			public.  It is maintained by student members of the team.</span>
 			
 			</address><!-- /#about -->
-			<p>2012 <a href = "team53.org">Team 53</a>.</p>
 			
 			<center>
 			<img src="../images/temp/banner.gif" width="100%" alt="Cow Abduction Pic" class="photo" />
 			</center>
 			
+			<p><a href = "team53.org">Team 53</a> | 2012</p>
 			
 		</footer><!-- /#contentinfo -->
 

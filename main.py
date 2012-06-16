@@ -68,18 +68,16 @@ class LogoutHandler(Handler):
     def get(self):
         self.response.headers.add_header('Set-Cookie', 'user_id=; Path=/')
         self.redirect("/login")
-
             
-class AdminHandler(Handler):
+class MembersHandler(Handler):
      def get(self):        
         cookie = self.request.cookies.get("user_id")
         user = authenticate_cookie(cookie)
         if user: user = get_user(user)
-        if user and user.isadmin:           
-            user = user.username            
-            self.render("admin.html", user = user)
-        else:
-            self.redirect("/login")
+               
+                      
+        self.render("members.html", user = user)
+        
 
      def post(self):
         cookie = self.request.cookies.get("user_id")
@@ -151,7 +149,7 @@ class NewpostHandler(Handler):
             if subject and content:
                 post = Post(subject=subject, content=content, username = user.username, user = user.key().id())            
                 post.put()
-                self.redirect("/blog")              
+                self.redirect("/blog")
             else:
                 self.render_form(subject, content, "Please provide a title and content", user=user.username)
 
@@ -202,11 +200,6 @@ class EditPostHandler(Handler):
             else:
                 self.render_form(subject, content, "Please provide a title and content", user=user)
         
-        
-        
-
-
-        
 class CalendarHandler(Handler):
     def get(self):
         cookie = self.request.cookies.get("user_id")
@@ -220,8 +213,8 @@ app = webapp2.WSGIApplication([('/', MainHandler),
                                ('/blog', BlogHandler),
                                ('/login', LoginHandler),
                                ('/logout', LogoutHandler),
-                               ('/admin', AdminHandler),
                                ('/newpost', NewpostHandler),
+                               ('/members', MembersHandler),
                                ('/deletepost', DeletepostHandler),
                                ('/editpost/(\d+)', EditPostHandler),
                                ('/calendar', CalendarHandler)],
