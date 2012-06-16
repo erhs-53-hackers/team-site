@@ -295,6 +295,8 @@ text-decoration: none;}
 .about-entry { 
 border-bottom: 1px solid #eee; 
 padding: 1.5em 0; } 
+.about-entry h2 {
+color: #00ff00;}
 li:last-child .about-entry, #content > .about-entry {border: 0; margin: 0;} 
 #content > .about-entry {padding: 1em 0;}  
 .entry-title {
