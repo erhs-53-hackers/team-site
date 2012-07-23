@@ -5,6 +5,7 @@ import urllib
 from cookie import *
 from password import *
 from handlerbase import Handler
+from google.appengine.api import images
 from google.appengine.ext import db
 from database import *
 import json
@@ -88,6 +89,10 @@ class MembersHandler(Handler):
             password = self.request.get('password')
             verify = self.request.get('verify')
             email = self.request.get('email')
+            image = self.request.get('image')
+            logging.error("image: %s" % image)         
+            image = images.resize(image, 32, 32)
+            image = db.Blob(image)
             
             v_user = match(USER, username)
             v_pass = match(PASS, password)
@@ -103,7 +108,7 @@ class MembersHandler(Handler):
 
             if v_user and v_pass and v_verify and v_email and v_existing_user < 1:
                 password = make_pw_hash(username, password)
-                newuser = User(username=username, password=password, email = email, isadmin=False)
+                newuser = User(username=username, password=password, email = email, isadmin=False, userimage=image)
                 newuser.put()
                 user_id = make_secure_val(str(newuser.key().id()))
                 self.response.headers.add_header('Set-Cookie', 'user_id=%s' % user_id)
@@ -119,7 +124,7 @@ class MembersHandler(Handler):
                 if not v_email: m_email = 'not a valid email.'
                 if v_existing_user > 0: m_user = 'That user already exists.'
                 
-                self.render("admin.html", name = username,
+                self.render("members.html", user = user,
                             email = m_email,
                             username = m_user,
                             password =  m_pass,
@@ -218,6 +223,15 @@ class AboutHandler(Handler):
             
         self.render("about.html", user = user)
         
+class ImageHandler(Handler):
+    def get(self):
+        user = User.get_by_id(int(self.request.get("id")))
+        if user.userimage:
+            self.response.headers['Content-Type'] = "image/png"
+            self.response.out.write(user.userimage)
+        else:
+            self.error(404)
+        
 
 app = webapp2.WSGIApplication([('/', MainHandler),
                                ('/blog', BlogHandler),
@@ -228,5 +242,6 @@ app = webapp2.WSGIApplication([('/', MainHandler),
                                ('/deletepost', DeletepostHandler),
                                ('/editpost/(\d+)', EditPostHandler),
                                ('/calendar', CalendarHandler),
+                               ('/image', ImageHandler),
                                ('/about', AboutHandler)],
                               debug=True)
