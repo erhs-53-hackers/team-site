@@ -1,8 +1,16 @@
 #!/usr/bin/env python
+import sys
+sys.path.append("./lib/")
+
 import webapp2
 import os
 import jinja2
 import cgi
+from cookie import authenticate_cookie
+from database import get_user
+from collections import namedtuple
+
+
 
 
 def guess_autoescape(template_name):
@@ -19,6 +27,11 @@ env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
                          extensions=['jinja2.ext.autoescape'])
                         
 class Handler(webapp2.RequestHandler):
+    def login(self):
+        cookie = self.request.cookies.get("user_id")
+        user = get_user(authenticate_cookie(cookie))
+        self.user = user
+        
     def write(self, *a, **kw):
         self.response.out.write(*a, **kw)
 
