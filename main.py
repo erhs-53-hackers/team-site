@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+import sys
+sys.path.append("./lib/")
+sys.path.append("./lib/db/")
 
 import webapp2
 import urllib
@@ -11,8 +14,8 @@ from database import *
 import json
 import logging
 import datetime
-import sys
-#sys.path.append("./test/")
+
+
 
 
 
@@ -87,10 +90,10 @@ class MembersHandler(Handler):
             password = self.request.get('password')
             verify = self.request.get('verify')
             email = self.request.get('email')
-            image = self.request.get('image')
-            logging.error("image: %s" % image)         
-            image = images.resize(image, 32, 32)
-            image = db.Blob(image)
+            #image = self.request.get('image')
+            #logging.error("image: %s" % image)         
+            #image = images.resize(image, 32, 32)
+            #image = db.Blob(image)
             
             v_user = match(USER, username)
             v_pass = match(PASS, password)
@@ -106,7 +109,7 @@ class MembersHandler(Handler):
 
             if v_user and v_pass and v_verify and v_email and v_existing_user < 1:
                 password = make_pw_hash(username, password)
-                newuser = User(username=username, password=password, email = email, isadmin=False, userimage=image)
+                newuser = User(username=username, password=password, email = email, isadmin=False)
                 newuser.put()
                 user_id = make_secure_val(str(newuser.key().id()))
                 self.response.headers.add_header('Set-Cookie', 'user_id=%s' % user_id)
