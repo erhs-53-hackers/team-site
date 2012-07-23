@@ -11,26 +11,25 @@ from database import *
 import json
 import logging
 import datetime
+import sys
+#sys.path.append("./test/")
 
 
 
 class MainHandler(Handler):
     def get(self):
-        cookie = self.request.cookies.get("user_id")
-        user = authenticate_cookie(cookie)
-        if user:
-            user = get_user(user)
-            user = user.username
         
+        cookie = self.request.cookies.get("user_id")
+        user = get_user(authenticate_cookie(cookie))
+        if user: user = user.username        
         
         self.render("index.html", user = user)
 class BlogHandler(Handler):
     def get(self):
         cookie = self.request.cookies.get("user_id")
-        user = authenticate_cookie(cookie)
-        if user:
-            user = get_user(user)
-            user = user.username  
+        user = get_user(authenticate_cookie(cookie))
+        if user: user = user.username
+        
         #user = User(username="admin", password=make_pw_hash('admin', 'admin1234'), isadmin=True)
         #user.put()
         posts = db.GqlQuery("SELECT * FROM Post ORDER BY created DESC")      
@@ -39,10 +38,9 @@ class BlogHandler(Handler):
 class LoginHandler(Handler):
      def get(self):
         cookie = self.request.cookies.get("user_id")
-        user = authenticate_cookie(cookie)
-        if user:
-            user = get_user(user)
-            user = user.username
+        user = get_user(authenticate_cookie(cookie))
+        if user: user = user.username
+        
         self.render('login.html', user = user, remember = "false")
 
      def post(self):
@@ -136,18 +134,18 @@ class NewpostHandler(Handler):
         self.render("newpost.html", subject=subject, content=content, error=error, user=user)
     def get(self):
         cookie = self.request.cookies.get("user_id")
-        user = authenticate_cookie(cookie)
-        if user: 
-            user = get_user(user)
-            self.render_form(user = user.username)
+        user = get_user(authenticate_cookie(cookie))
+        if user: user = user.username
+        if user:
+            self.render_form(user = user)
         else:
             self.redirect("/login")
+        
 
     def post(self):
         cookie = self.request.cookies.get("user_id")
-        user = authenticate_cookie(cookie)
-        if user: 
-            user = get_user(user)
+        user = get_user(authenticate_cookie(cookie))        
+        if user:            
             subject = self.request.get("subject")
             content = self.request.get("content")
 
@@ -161,7 +159,7 @@ class NewpostHandler(Handler):
 class DeletepostHandler(Handler):    
     def post(self):
         cookie = self.request.cookies.get("user_id")
-        user = authenticate_cookie(cookie)        
+        user = get_user(authenticate_cookie(cookie))            
         if user:
             post = self.request.get("post")
             post = Post.get_by_id(int(post))
@@ -172,8 +170,9 @@ class DeletepostHandler(Handler):
 class EditPostHandler(Handler):
     def get(self, resource):
         cookie = self.request.cookies.get("user_id")
-        user = authenticate_cookie(cookie)        
-        if user: user = get_user(user).username
+        user = get_user(authenticate_cookie(cookie))
+        if user: user = user.username
+                
         post = Post.get_by_id(int(resource))
         post_user = None      
         if post: post_user = post.username
@@ -187,8 +186,9 @@ class EditPostHandler(Handler):
             
     def post(self, ID):
         cookie = self.request.cookies.get("user_id")
-        user = authenticate_cookie(cookie)        
-        if user: user = get_user(user).username
+        user = get_user(authenticate_cookie(cookie))
+        if user: user = user.username
+        
         post = Post.get_by_id(int(ID))
         post_user = None      
         if post: post_user = post.username
@@ -208,18 +208,17 @@ class EditPostHandler(Handler):
 class CalendarHandler(Handler):
     def get(self):
         cookie = self.request.cookies.get("user_id")
-        user = authenticate_cookie(cookie)        
-        if user: 
-            user = get_user(user).username
+        user = get_user(authenticate_cookie(cookie))
+        if user: user = user.username
+            
             
         self.render("calendar.html", user = user)
         
 class AboutHandler(Handler):
     def get(self):
         cookie = self.request.cookies.get("user_id")
-        user = authenticate_cookie(cookie)        
-        if user: 
-            user = get_user(user).username
+        user = get_user(authenticate_cookie(cookie))
+        if user: user = user.username
             
         self.render("about.html", user = user)
         
