@@ -1,10 +1,14 @@
 #!/usr/bin/env python
+import sys
+sys.path.append("./lib/")
+sys.path.append("./lib/db/")
 
 import webapp2
 import urllib
 from cookie import *
 from password import *
 from handlerbase import Handler
+from google.appengine.api import images
 from google.appengine.ext import db
 from database import *
 import json
@@ -13,23 +17,21 @@ import datetime
 
 
 
+
+
 class MainHandler(Handler):
     def get(self):
-        cookie = self.request.cookies.get("user_id")
-        user = authenticate_cookie(cookie)
-        if user:
-            user = get_user(user)
-            user = user.username
-        
+        self.login()
+        user = None
+        if self.user: user = self.user.username        
         
         self.render("index.html", user = user)
 class BlogHandler(Handler):
     def get(self):
-        cookie = self.request.cookies.get("user_id")
-        user = authenticate_cookie(cookie)
-        if user:
-            user = get_user(user)
-            user = user.username  
+        self.login()
+        user = None
+        if self.user: user = self.user.username
+        
         #user = User(username="admin", password=make_pw_hash('admin', 'admin1234'), isadmin=True)
         #user.put()
         posts = db.GqlQuery("SELECT * FROM Post ORDER BY created DESC")      
@@ -37,11 +39,10 @@ class BlogHandler(Handler):
         
 class LoginHandler(Handler):
      def get(self):
-        cookie = self.request.cookies.get("user_id")
-        user = authenticate_cookie(cookie)
-        if user:
-            user = get_user(user)
-            user = user.username
+        self.login()
+        user = None
+        if self.user: user = self.user.username
+        
         self.render('login.html', user = user, remember = "false")
 
      def post(self):
@@ -71,9 +72,9 @@ class LogoutHandler(Handler):
             
 class MembersHandler(Handler):
      def get(self):        
-        cookie = self.request.cookies.get("user_id")
-        user = authenticate_cookie(cookie)
-        if user: user = get_user(user)
+        self.login()
+        user = None
+        if self.user: user = self.user.username
                
                       
         self.render("members.html", user = user)
@@ -88,6 +89,10 @@ class MembersHandler(Handler):
             password = self.request.get('password')
             verify = self.request.get('verify')
             email = self.request.get('email')
+            #image = self.request.get('image')
+            #logging.error("image: %s" % image)         
+            #image = images.resize(image, 32, 32)
+            #image = db.Blob(image)
             
             v_user = match(USER, username)
             v_pass = match(PASS, password)
@@ -119,7 +124,7 @@ class MembersHandler(Handler):
                 if not v_email: m_email = 'not a valid email.'
                 if v_existing_user > 0: m_user = 'That user already exists.'
                 
-                self.render("admin.html", name = username,
+                self.render("members.html", user = user,
                             email = m_email,
                             username = m_user,
                             password =  m_pass,
@@ -130,33 +135,33 @@ class NewpostHandler(Handler):
     def render_form(self, subject="", content="", error="",user=None):
         self.render("newpost.html", subject=subject, content=content, error=error, user=user)
     def get(self):
-        cookie = self.request.cookies.get("user_id")
-        user = authenticate_cookie(cookie)
-        if user: 
-            user = get_user(user)
-            self.render_form(user = user.username)
+        self.login()
+        user = None
+        if self.user: user = self.user.username
+        if user:
+            self.render_form(user = user)
         else:
             self.redirect("/login")
+        
 
     def post(self):
-        cookie = self.request.cookies.get("user_id")
-        user = authenticate_cookie(cookie)
-        if user: 
-            user = get_user(user)
+        self.login()               
+        if self.user:            
             subject = self.request.get("subject")
             content = self.request.get("content")
 
             if subject and content:
-                post = Post(subject=subject, content=content, username = user.username, user = user.key().id())            
+                post = Post(subject=subject, content=content, username = self.user.username, user = self.user.key().id())            
                 post.put()
                 self.redirect("/blog")
             else:
-                self.render_form(subject, content, "Please provide a title and content", user=user.username)
+                self.render_form(subject, content, "Please provide a title and content", user=self.user.username)
 
 class DeletepostHandler(Handler):    
     def post(self):
-        cookie = self.request.cookies.get("user_id")
-        user = authenticate_cookie(cookie)        
+        self.login()
+        user = None
+        if self.user: user = self.user.username            
         if user:
             post = self.request.get("post")
             post = Post.get_by_id(int(post))
@@ -166,9 +171,10 @@ class DeletepostHandler(Handler):
         
 class EditPostHandler(Handler):
     def get(self, resource):
-        cookie = self.request.cookies.get("user_id")
-        user = authenticate_cookie(cookie)        
-        if user: user = get_user(user).username
+        self.login()
+        user = None
+        if self.user: user = self.user.username
+                
         post = Post.get_by_id(int(resource))
         post_user = None      
         if post: post_user = post.username
@@ -181,9 +187,10 @@ class EditPostHandler(Handler):
             self.redirect('/login')
             
     def post(self, ID):
-        cookie = self.request.cookies.get("user_id")
-        user = authenticate_cookie(cookie)        
-        if user: user = get_user(user).username
+        self.login()
+        user = None
+        if self.user: user = self.user.username
+        
         post = Post.get_by_id(int(ID))
         post_user = None      
         if post: post_user = post.username
@@ -202,21 +209,29 @@ class EditPostHandler(Handler):
         
 class CalendarHandler(Handler):
     def get(self):
-        cookie = self.request.cookies.get("user_id")
-        user = authenticate_cookie(cookie)        
-        if user: 
-            user = get_user(user).username
+        self.login()
+        user = None
+        if self.user: user = self.user.username
+            
             
         self.render("calendar.html", user = user)
         
 class AboutHandler(Handler):
     def get(self):
-        cookie = self.request.cookies.get("user_id")
-        user = authenticate_cookie(cookie)        
-        if user: 
-            user = get_user(user).username
+        self.login()
+        user = None
+        if self.user: user = self.user.username
             
         self.render("about.html", user = user)
+        
+class ImageHandler(Handler):
+    def get(self):
+        user = User.get_by_id(int(self.request.get("id")))
+        if user.userimage:
+            self.response.headers['Content-Type'] = "image/png"
+            self.response.out.write(user.userimage)
+        else:
+            self.error(404)
         
 
 app = webapp2.WSGIApplication([('/', MainHandler),
@@ -228,5 +243,6 @@ app = webapp2.WSGIApplication([('/', MainHandler),
                                ('/deletepost', DeletepostHandler),
                                ('/editpost/(\d+)', EditPostHandler),
                                ('/calendar', CalendarHandler),
+                               ('/image', ImageHandler),
                                ('/about', AboutHandler)],
                               debug=True)
