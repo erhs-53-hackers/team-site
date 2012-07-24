@@ -4,9 +4,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title> Welcome to Area 53 </title>
-		<link rel="stylesheet" href="../css/main.css" type="text/css" />	
-
-		
+		<link rel="stylesheet" href="../css/main.css" type="text/css" />
 		
 		<!--[if IE]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
@@ -17,12 +15,10 @@
 		<!--[if lt IE 7]>
 		<link rel="stylesheet" type="text/css" media="all" href="css/ie6.css"/>
 		<![endif]-->
-		
-		
 	</head>
-	
+
 	<body id="index" class="home">
-		{% if user %}
+		{% if user %}		
 		<div align="right">{{user}}(<a href="/logout">logout</a>)</div>
 		{% else %}
 		<div align="right"><a href="/login">User Login</a></div>
@@ -37,32 +33,14 @@
 				<li><a href="/about">about</a></li>
 				<li><a href="/blog">blog</a></li>
 				<li><a href="/contact">contact</a></li>
-				<li><a href="/sponsors">sponsors</a></li>
+				<li class="active"><a href="/sponsors">sponsors</a></li>
 				<li><a href="/calendar">calendar</a></li>
 				<li><a href="/members">members</a></li>
 				<li><a href="/gallery">gallery</a></li>
 			</ul></nav>
 			
 		</header><!-- /#banner -->
-		
-		<section id="content" class="body">
-			<form method="post">
-			<label>
-				<div>Subject</div>
-				<input type="text" value="{{subject}}" name="subject">
-			</label>
-			<label>
-				<div>Content</div>
-				<textarea style="width:100%;height:200px" name="content">{{content}}</textarea>
-			</label>
-			<div class="error">{{error}}</div>
-			<input type="submit">
-			</form>	
-			
-		</section><!-- /#content -->
-	
-		
-		
+
 		<footer id="contentinfo" class="body">
 			<address id="about" class="vcard body">
 			
@@ -85,7 +63,6 @@
 			
 		</footer><!-- /#contentinfo -->
 
-	</body>
-	
-	
+</body>
+
 </html>
