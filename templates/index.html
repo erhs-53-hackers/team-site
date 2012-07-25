@@ -1,177 +1,169 @@
 <!DOCTYPE html>
-
 <html lang="en">
 	<head>
-		<meta charset="utf-8" />
-		<title> Welcome to Area 53 </title>
-		<link rel="stylesheet" href="../css/main.css" type="text/css" />
-		<link rel="stylesheet" href="../css/banner.css" type="text/css" />
-		
+		<meta charset="utf-8">
+		<title>Eleanor Roosevelt Engineering and Robotics</title>
+		<link rel="stylesheet" href="../css/main.css">
+		<link rel="stylesheet" href="../css/nav.css">
+		<link rel="stylehseet" href="../css/banner.css">
 		<!--[if IE]>
-		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
-		</script><![endif]-->
-		<!--[if lte IE 7]>
-		<script src="js/IE8.js" type="text/javascript">
-		</script><![endif]-->
-		<!--[if lt IE 7]>
-		<link rel="stylesheet" type="text/css" media="all" href="css/ie6.css"/>
+			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 	</head>
-	
-	<body id="index" class="home">
-		{% if user %}		
-		<div align="right">{{user}}(<a href="/logout">logout</a>)</div>
-		{% else %}
-		<div align="right"><a href="/login">User Login</a></div>
-		{% endif %}
-		
-	  <div id="container"><div class="photobanner">
-			<img class="first" src="../images/image-1.jpg" alt="" /> 
-			<img src="../images/image-2.jpg" alt="" /> 
-			<img src="../images/image-3.jpg" alt="" />
-			<img src="../images/image-4.jpg" alt="" />
-			<img src="../images/image-5.jpg" alt="" /> 
-			<img src="../images/image-6.jpg" alt="" />
-			<img src="../images/image-1.jpg" alt="" />
-			<img src="../images/image-2.jpg" alt="" /> 
-			<img src="../images/image-3.jpg" alt="" /> 
-			<img src="../images/image-4.jpg" alt="" /> 
-	  </div></div>
-	
-		<header id="banner" class="body">
-			<h1><a href="#">Eleanor Roosevelt<strong> Engineering Team
-			</strong></a></h1>
-			
-			<nav><ul>
-				<li class="active"><a href="/">home</a></li>
-				<li><a href="/about">about</a></li>
-				<li><a href="/blog">blog</a></li>
-				<li><a href="/contact">contact</a></li>
-				<li><a href="/sponsors">sponsors</a></li>
-				<li><a href="/calendar">calendar</a></li>
-				<li><a href="/members">members</a></li>
-				<li><a href="/gallery">gallery</a></li>
-			</ul></nav>
-			
-		</header><!-- /#banner -->
-		
-		<aside id="featured" class="body"><article>
-			<figure>
-				<img src="../images/logo/alien-head.jpg" alt="Area 53" />
-			</figure>
-			
-			<hgroup>
-				<h2>Featured</h2>
-				<h3><a href="#"> Area 53 at Baltimore Regionals</a></h3>
-			</hgroup>
-			
-			<p> The Cow Abductors made an impressive showing at the 
-			Baltimore Regional robotics competition.  Area 53 competed
-			impressively, well outperforming the expectations of the 
-			team.  Overall, Area 53 took somethingth place.
-			</p>
-		</article></aside><!-- /#featured -->
-		
-		<section id="content" class="body">
-		
-			<ol id="posts-list" class="hfeed">
-			
-			<li><article class="hentry">
-				<header>
-				<h2 class="entry-title"><a href="#" rel="bookmark" title="Permalink to this POST TITLE">
-				Welcome!</a></h2>
-				</header>
-				
-				<div class="entry-content"><p>Area 53 is the Robotics team located at Eleanor
-				Roosevelt High School in Greenbelt, MD.  The Cow
-				Abductors consists of approximately 50 students who 
-				work together to develop, design, and ultimately create
-				innovative solutions to a variety of problems.  We strive
-				to encourage creativity and teach real-world skills to
-				our students.</p></div><!-- /.entry-content -->
-			</article></li>
-			
-			<li><article class="hentry">
-				<header>
-				<h2 class="entry-title"><a href="#">Competition</a></h2>
-				</header>
-				
-				<div class="entry-content"><p> 
-				We are proud annual participants of the FIRST FRC
-				competition and the ION Mini-Urban Challenge.  The Eleanor Roosevelt
-				Engineering Team competes in the First Robotics Challenge as Team 53.  Additionally,
-				our team also assists others in competitions such as FIRST's 
-				First Lego League (FLL) competition.</p></div><!-- /.entry-content -->
-			</li>
+	<body class="no-js">
+		<div id="container">
+			<aside id="login">
+				{% if user %}		
+				<div align="right">{{user}}(<a href="/logout">logout</a>)</div>
+				{% else %}
+				<div align="right"><a href="/login">User Login</a></div>
+				{% endif %}
+			</aside>
+			<header id="banner">
+				<a href="/"><img src="../images/logo/banner.gif"></a>
+			</header>
+			<script>
+				var el = document.getElementsByTagName("body")[0];
+				el.className = "";
+			</script>
+			<noscript>
+				<!--[if IE]>
+					<link rel="stylesheet" href="../css/ie.css">
+				<![endif]-->
+			</noscript>
+			<nav id="topNav">
+				<ul>
+					<li><a href="/" title="Home">Home</a></li>
+					<li><a href="/about" title="About">About</a>
+						<ul>
+							<li><a href="/team-history" title="Team History">Team History</a></li>
 
-			<li><article class="hentry">
-				<header>
-				<h2 class="entry-title"><a href="#">FIRST Robotics</a></h2>
-				</header>
-
-				<div class="entry-content"<p>
-				FIRST (For the Inspiration and Recognition of Science and Technology) is
-				an organization dedicated to instilling the principles of the STEM field in
-				today's youth.  Their main competition, the First Robotics Competition (FRC)
-				is held every year.  A new competiton is anounced in early January every year,
-				and every team is given six weeks to build a robot that can meet the challenges
-				of competition.</p></div>
-			</li>
-			
+							<li><a href="/first" title="FIRST">FIRST</a></li>
+							<li><a href="/mechanical" title="Mechanical Team">Mechanical Team</a></li>
+							<li><a href="/programming" title="Programming Team">Programming Team</a></li>
+							<li class="last"><a href="/about-site" title="Website">Website</a></li>
+						</ul>        
+					</li>
+				  <li><a href="/blog" title="Blog">Blog</a></li>
+				  <li><a href="/contact" title="Contact">Contact</a></li>
+				  <li><a href="/sponsors" title="Sponsors">Sponsors</a></li>
+				  <li><a href="/calendar" title="Calendar">Calendar</a></li>
+				  <li><a href="/members" title="Members">Members</a></li>
+				  <li class="last"><a href="/gallery" title="Photo Gallery">Gallery</a></li>
+			  </ul>
+			</nav>
+			<aside id="welcome">
+				<figure>
+					<iframe src="http://www.youtube.com/embed/NJyl8wYXq8s?rel=0" 
+							frameborder="0" allowfullscreen>
+					</iframe>
+				</figure>
+				<hgroup>
+					<h2>Eleanor Roosevelt</h2>
+					<h3>Robotics and Engineering</h3>
+				</hgroup>
+				<p>The Eleanor Roosevelt High School Engineering Team is a group
+				of about 45 bright students who come together to think of, design,
+				and develop creative solutions to a wide variety of challenges in
+				the Science, Technology, Engineering, and Mathematics (STEM)
+				Field.</p>
+			</aside>
+			<section id="content">
+			<ol>
+				<li><article class="entry">
+					<h2>Welcome!</h2>
+					<p>Area 53 is the Robotics team located at Eleanor
+					Roosevelt High School in Greenbelt, MD.  The Cow
+					Abductors consists of approximately 50 students who 
+					work together to develop, design, and ultimately create
+					innovative solutions to a variety of problems.  We strive
+					to encourage creativity and teach real-world skills to
+					our students.</p>
+				</article></li>
+				<li><article class="entry">
+					<h2>Competition</h2>
+					<p>We are proud annual participants of the FIRST FRC
+					competition and the ION Mini-Urban Challenge.  The Eleanor Roosevelt
+					Engineering Team competes in the First Robotics Challenge as Team 53.  Additionally,
+					our team also assists others in competitions such as FIRST's 
+					First Lego League (FLL) competition.</p>
+				</article></li>
+				<li><article class="entry">
+					<h2>FIRST Robotics</h2>
+					<p>FIRST (For the Inspiration and Recognition of Science and Technology) is
+					an organization dedicated to instilling the principles of the STEM field in
+					today's youth.  Their main competition, the First Robotics Competition (FRC)
+					is held every year.  A new competiton is anounced in early January every year,
+					and every team is given six weeks to build a robot that can meet the challenges
+					of competition.</p>
+				</article></li>
 			</ol><!-- /#posts-list -->
-			
 		</section><!-- /#content -->
-	
-		<section id="extras" class="body"> 
-			<div class="blogroll"> 
-				<h2>links</h2> <ul>  
-				<li><a href="http://www.usfirst.org/" rel="external">FIRST site</a></li> 
-				<li><a href="http://www.usfirst.org/roboticsprograms/frc" rel="external">FRC Site</a></li> 
-				<li><a href="http://www.usfirst.org/roboticsprograms/fll" rel="external">FLL</a></li>  
-				<li><a href="http://www.mdfirst.org/" rel="external">MD FIRST</a></li> 
-				<li><a href="http://www.ion.org/outreach/muc/" rel="external">Mini-Urban Challenge</a></li> 
-				<li><a href="http://www.vexrobotics.com/" rel="external">VEX Robotics</a></li>  
-				<li><a href="http://mindstorms.lego.com/en-us/Default.aspx" rel="external">Lego Mindstorms</a></li> 
-				<li><a href="http://arduino.cc/" rel="external">Arduino</a></li> 
-				<li><a href="http://beagleboard.org/" rel="external">BeagleBoard</a></li>  
-				<li><a href="http://beagleboard.org/bone" rel="external">BeagleBone</a></li> 
-				<li><a href="http://github.com" rel="external">github</a></li> 
-				<li></li>
-				</ul>
-			</div><!-- /.blogroll -->  
-			<div class="social"> 
-				<h2>follow us</h2> <ul>  
-				<li><a href="http://www.facebook.com/pages/ERHS-Robotics-Club/184052998344999" rel="us">facebook</a></li>  
-				<li><a href="www.flickr.com/photos/erhsrobotics/" rel="us">flickr</a></li> 
-				<li><a href="#" rel="us">twitter</a></li>  
-				<li><a href="http://www.github.com/erhs-53-hackers" rel="us">github</a></li>
-				</ul>
-			</div><!-- /.social --> 
-		</section><!-- /#extras -->
-		
-		<footer id="contentinfo" class="body">
-			<address id="about" class="vcard body">
-			
-			<span class="primary">
-			<strong><a href="#" class="fn url">Eleanor Roosevelt</a></strong>
-			<span class="role">Engineering Team</span>
-			</span><!-- /.primary -->
-						
-			<span class="bio">The Eleanor Roosevelt Engineering Teams website offers 
-			information to team members, mentors, parents, and the public.  The website 
-			is built and maintained by student members of the team.</span><!-- /.bio -->
-			
-			</address><!-- /#about -->
-			
-			<center>
-			<img src="../images/logo/banner.gif" width="100%" alt="Cow Abduction Pic" class="photo" />
-			</center>
-			
-			<p><a href = "http://www.team53.org/">ERHS Engineering</a> | 2012</p>
-			
-		</footer><!-- /#contentinfo -->
+			<section id="extras"> 
+				<div class="blogroll"> 
+					<h2>links</h2> <ul>  
+					<li><a href="http://www.usfirst.org/" rel="external">FIRST site</a></li> 
+					<li><a href="http://www.usfirst.org/roboticsprograms/frc" rel="external">FRC Site</a></li> 
+					<li><a href="http://www.usfirst.org/roboticsprograms/fll" rel="external">FLL</a></li>  
+					<li><a href="http://www.mdfirst.org/" rel="external">MD FIRST</a></li> 
+					<li><a href="http://www.ion.org/outreach/muc/" rel="external">Mini-Urban Challenge</a></li> 
+					<li><a href="http://www.vexrobotics.com/" rel="external">VEX Robotics</a></li>  
+					<li><a href="http://mindstorms.lego.com/en-us/Default.aspx" rel="external">Lego Mindstorms</a></li> 
+					<li><a href="http://arduino.cc/" rel="external">Arduino</a></li> 
+					<li><a href="http://beagleboard.org/" rel="external">BeagleBoard</a></li>  
+					<li><a href="http://beagleboard.org/bone" rel="external">BeagleBone</a></li> 
+					<li><a href="http://github.com" rel="external">github</a></li> 
+					<li></li>
+					</ul>
+				</div><!-- /.blogroll -->  
+				<div class="social"> 
+					<h2>follow us</h2> <ul>  
+					<li><a href="http://www.facebook.com/pages/ERHS-Robotics-Club/184052998344999" rel="us">facebook</a></li>  
+					<li><a href="www.flickr.com/photos/erhsrobotics/" rel="us">flickr</a></li> 
+					<li><a href="#" rel="us">twitter</a></li>  
+					<li><a href="http://www.github.com/erhs-53-hackers" rel="us">github</a></li>
+					</ul>
+				</div><!-- /.social --> 
+			</section><!-- /#extras -->
+			<footer id="contentinfo">
+				<address id="about">
+					<span class="primary">
+						<strong>Eleanor Roosevelt</strong>Engineering Team
+					</span><!-- /.primary -->	
+					<span class="bio">
+						The Eleanor Roosevelt Engineering Teams website offers 
+						information to team members, mentors, parents, and the public.  
+						The website is built and maintained by student members of the team.
+					</span><!-- /.bio -->
+				</address><!-- /#about -->
+				<p><a href="http://www.team53.org/">ERHS Engineering</a> | 2012</p>
+			</footer><!-- /#contentinfo -->
+			<script src="../js/jquery.js"></script>
+			<script src="../js/modernizr.js"></script>
+	        <script>
+			(function($){
 				
+				//cache nav
+				var nav = $("#topNav");
+				
+				//add indicator and hovers to submenu parents
+				nav.find("li").each(function() {
+					if ($(this).find("ul").length > 0) {
+						$("<span>").text("^").appendTo($(this).children(":first"));
+
+						//show subnav on hover
+						$(this).mouseenter(function() {
+							$(this).find("ul").stop(true, true).slideDown();
+						});
+						
+						//hide submenus on exit
+						$(this).mouseleave(function() {
+							$(this).find("ul").stop(true, true).slideUp();
+						});
+					}
+				});
+			})(jQuery);
+		    </script>
+		</div>
 	</body>
-	
-	
 </html>

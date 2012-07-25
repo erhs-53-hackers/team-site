@@ -1,0 +1,389 @@
+/* Name: ERHS Engineering Date: July 2012 
+ * Description: CSS for New ERHS Robotics Team Website
+ * Author: Nick Y, parts based on Smashing HTML 5 by 
+ * Enrique Ramírez (http://enrique-ramirez.com)
+ */
+
+/* Imports */ 
+@import url("reset.css"); 
+@import url("global-forms.css"); 
+
+/***** Global *****/ 
+
+/* Body */ 
+body { 
+background:  #000066 url('../images/bg.png');
+background-color: #000066;
+color: #fff; 
+font-size: 87.5%; /* Base font size: 14px */ 
+font-family: 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+line-height: 1.429; 
+margin: 0; 
+padding: 0; 
+text-align: left; }  
+
+/* Headings */ 
+h2 {font-size: 1.571em}	/* 22px */ 
+h3 {font-size: 1.429em}	/* 20px */ 
+h4 {font-size: 1.286em}	/* 18px */ 
+h5 {font-size: 1.143em}	/* 16px */
+h6 {font-size: 1em}	/* 14px */  
+h2, h3, h4, h5, h6 { 
+font-weight: 400; 
+line-height: 1.1; 
+margin-bottom: .8em; }  
+
+/* Anchors */ 
+a {
+outline: 0;} 
+
+a:link, a:visited { 
+color: #0099ff;
+padding: 0 1px; 
+text-decoration: underline; } 
+a:hover, a:active { 
+background-color: none; 
+color: #fff; 
+text-decoration: none; 
+text-shadow: 1px 1px 1px #333; }  
+
+/* Paragraphs */ 
+p {
+margin-bottom: 1.143em;} 
+* p:last-child {
+margin-bottom: 0;}  
+strong, b {
+font-weight: bold;} 
+em, i {
+font-style: italic;}  
+::-moz-selection {background: none; color: #fff;} 
+::selection {background: #none; color: #fff;} 
+
+/* Lists */ 
+ul { 
+list-style: outside disc; 
+margin: 1em 0 1.5em 1.5em; }  
+ol { list-style: outside decimal; 
+margin: 1em 0 1.5em 1.5em; }  
+dl {margin: 0 0 1.5em 0;} 
+dt {font-weight: bold;} 
+dd {margin-left: 1.5em;}  
+
+/* Quotes */ blockquote {font-style: italic;} cite {}  q {}  
+/* Tables */ table {margin: .5em auto 1.5em auto; width: 98%;}  
+/* Thead */ thead th {padding: .5em .4em; text-align: left;} thead td {}  
+/* Tbody */ tbody td {padding: .5em .4em;} tbody th {}  tbody .alt td {} tbody .alt th {}  
+/* Tfoot */ tfoot th {} tfoot td {}
+
+/* HTML5 tags */ 
+header, section, footer, aside, nav, article, figure { 
+display: block; }
+
+/***** Layout *****/ 
+.body {
+clear: both; 
+margin: 0 auto; 
+width: 800px;} 
+img.right figure.right {
+float: right; margin: 0 0 2em 2em;} 
+img.left, figure.left {
+float: right; margin: 0 0 2em 2em;}
+
+/* Header *****************/ 
+/* Banner */
+#banner { 
+margin: 0 auto; 
+padding: 2.5em 0 0 0;}  
+#banner h1 {
+font-size: 3.2em; 
+line-height: .6;} 
+#banner h1 a:link, #banner h1 a:visited { 
+color: #fff; 
+display: block; 
+font-weight: bold; 
+margin: 0 0 .6em .2em; 
+text-decoration: none; 
+width: 800px; } 
+#banner h1 a:hover, #banner h1 a:active { 
+background: none; 
+color: #00aaff; 
+text-shadow: none; }  
+#banner h1 strong {
+font-size: 0.5em; font-weight: normal;}
+
+#banner h1 figure { 
+border: none;
+float: right; 
+margin: 0em 0em 0 0em; width: 150px; height: 150px; } 
+#banner h1 figure img {display: block; float: right;}
+
+/* Main Nav */ 
+#banner nav { 
+background: #0000ff; 
+font-size: 1.143em; 
+height: 40px; 
+line-height: 30px; 
+margin: 0 auto 2em auto; 
+padding: 0; 
+text-align: center; 
+width: 800px;  
+border-radius: 5px; 
+-moz-border-radius: 5px; 
+-webkit-border-radius: 5px; }  
+
+#banner nav ul {
+list-style: none;
+margin: 0 auto; 
+width: 800px;} 
+
+#banner nav li {
+float: left; 
+display: inline;
+margin: 0;}  
+
+#banner nav a:link, #banner nav a:visited { 
+color: #fff; 
+display: inline-block; 
+height: 30px; 
+padding: 5px 1.5em; 
+text-decoration: none; } 
+
+#banner nav a:hover, #banner nav a:active, #banner nav .active a:link, #banner nav .active a:visited { 
+background: #000; 
+color: #fff; 
+text-shadow: none !important; }  
+
+#banner nav li:first-child a { 
+border-top-left-radius: 5px; 
+-moz-border-radius-topleft: 5px; 
+-webkit-border-top-left-radius: 5px;  
+border-bottom-left-radius: 5px; 
+-moz-border-radius-bottomleft: 5px; 
+-webkit-border-bottom-left-radius: 5px; }
+
+/* Featured *****************/ 
+#featured { 
+background: #000;
+color: #fff;
+margin-bottom: 2em; 
+overflow: hidden; 
+padding: 20px; 
+width: 760px;  
+border-radius: 10px; 
+-moz-border-radius: 10px; 
+-webkit-border-radius: 10px; }  
+
+#featured figure { 
+border: 2px solid #eee;
+float: right; 
+margin: .786em 3em 50 5em; width: 150px; height: 150px; } 
+#featured figure img {display: block; float: right;}  
+
+#featured h2 {
+color: #0099ff; 
+text-decoration: underline;
+font-size: 1.714em; 
+margin-bottom: 0.333em;} 
+
+#featured h3 {
+font-size: 1.429em; 
+margin-bottom: .5em;}
+
+#featured h3 a:link, #featured h3 a:visited {
+color: #0099ff; 
+text-decoration: none;} 
+
+#featured h3 a:hover, #featured h3 a:active {
+color: #0000ff;
+background: none;}  
+
+/* Body *****************/ 
+#content { 
+background: #000; 
+margin-bottom: 2em; 
+overflow: hidden; 
+padding: 20px 20px; 
+width: 760px;  
+border-radius: 10px; 
+-moz-border-radius: 10px; 
+-webkit-border-radius: 10px; }
+
+
+
+#cotent p {
+background: none;} /* Doesn't work */
+
+/* Extras *****************/ 
+#extras {
+margin: 0 auto 3em auto; 
+overflow: hidden;}  
+
+#extras ul {
+list-style: none; 
+margin: 0;} 
+#extras li {
+border-bottom: 1px solid #fff;} 
+
+#extras h2 { 
+color: #0099ff; 
+font-size: 1.429em; 
+margin-bottom: .25em; 
+padding: 0 3px; }
+  
+#extras a:link, #extras a:visited { 
+color: #fff; 
+display: block; 
+border-bottom: 1px solid #F4E3E3; 
+text-decoration: none; 
+padding: .3em .25em; }  
+
+/* Blogroll */ 
+#extras .blogroll { 
+float: left; 
+width: 615px; }  
+#extras .blogroll li {float: left; margin: 0 20px 0 0; width: 185px;}  
+
+/* Social */ 
+#extras .social { 
+float: right; 
+width: 175px; }
+
+#extras li:last-child, /* last <li>*/ #extras li:last-child a /* <a> of last <li> */ {border: 0}
+
+#extras .blogroll li:nth-last-child(2), #extras .blogroll li:nth-last-child(3), #extras .blogroll li:nth-last-child(2) a, #extras .blogroll li:nth-last-child(3) a {border: 0;}
+
+#extras div[class='social'] a { background-repeat: no-repeat; background-position: 3px 6px; padding-left: 25px; }  
+/* Icons */ 
+.social a[href*='facebook.com'] {background-image: url('../images/icons/facebook.png');} 
+.social a[href*='twitter.com'] {background-image: url('../images/icons/twitter.png');}
+.social a[href*='flickr.com'] {background-image: url('../images/icons/flickr.png');}
+.social a[href*='github.com'] {background-image: url('../images/icons/github.png');}
+
+/* About *****************/ 
+#about { 
+background: #000;
+font-style: normal; 
+margin-bottom: 2em; 
+overflow: hidden; 
+padding: 20px; 
+text-align: left; 
+width: 760px;  
+border-radius: 10px; 
+-moz-border-radius: 10px; 
+-webkit-border-radius: 10px; }  
+
+#about .primary {
+float: left; 
+width: 165px;} 
+
+#about .primary strong {
+color: #C64350; 
+display: block; 
+font-size: 1.286em;} 
+
+#about .photo {
+float: left; 
+margin: 5px 20px;}  
+
+#about .url:link, #about .url:visited {
+text-decoration: none;} 
+ 
+#about .bio {float: right; width: 500px;}  
+
+/* Footer *****************/ 
+#contentinfo {
+padding-bottom: 2em; text-align: right;}
+
+/* Content Entries */
+.hentry { 
+border-bottom: 1px solid #eee; 
+padding: 1.5em 0; } 
+
+.hentry h2, .hentry h2 a {
+color: #0099ff;}
+
+li:last-child .hentry, #content > .hentry {
+border: 0; 
+margin: 0;} 
+
+#content > .hentry {padding: 1em 0;}  
+
+.entry-title {
+font-size: 1.429em; 
+margin-bottom: 0;} 
+
+/* Content */ 
+/* Blog Index */ 
+#posts-list {
+list-style: none; 
+margin: 0;} 
+
+#posts-list .hentry {
+padding-left: 0px; 
+position: relative;}
+
+#posts-list .hentry:hover {
+background: none; 
+color: #fff; } 
+
+#posts-list .hentry:hover a:link, #posts-list .hentry:hover a:visited { 
+text-shadow: 1px 1px 1px #333; }
+
+/* Login *****************/
+form {
+	width: 100%;}
+
+.button {
+	padding: 5px;
+	background-color: #000305;
+	color: #00ff00;
+	background: #000305;
+	font-size: 1.517em;
+}
+.remove-button {
+	background: url(../images/delete.png) no-repeat top;
+	width: 20px;
+	height: 20px;
+	padding: 0px;
+	float: right;	
+	border: none;	
+	padding-top: 1px;
+	-o-background-size:100% 100%;             /*  Opera  */
+    -webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*not working in Firefox as yet */
+	
+	
+}
+.remove-button:hover {
+	color:#FF001E;	
+}
+
+.edit-button {
+	display: block;
+	background: url(../images/edit.png) no-repeat top;
+	width: 20px;
+	height: 20px;
+	float: right;
+	border: none;	
+	padding-top: 1px;
+	-o-background-size:100% 100%;             /*  Opera  */
+    -webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*not working in Firefox as yet */
+
+
+}
+
+
+
+#admin-login { 
+background: #000305; 
+margin-bottom: 2em; 
+overflow: hidden; 
+padding: 20px 20px; 
+width: 760px;  
+border-radius: 10px; 
+-moz-border-radius: 10px; 
+-webkit-border-radius: 10px; }
+	
