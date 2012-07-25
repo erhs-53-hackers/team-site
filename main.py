@@ -29,13 +29,12 @@ class MainHandler(Handler):
 class BlogHandler(Handler):
     def get(self):
         self.login()
-        user = None
-        if self.user: user = self.user.username
+        
         
         #user = User(username="admin", password=make_pw_hash('admin', 'admin1234'), isadmin=True)
         #user.put()
         posts = db.GqlQuery("SELECT * FROM Post ORDER BY created DESC")      
-        self.render("blog.html", user = user, posts = posts)
+        self.render("blog.html", user = self.user, posts = posts)
         
 class LoginHandler(Handler):
      def get(self):
@@ -146,60 +145,59 @@ class NewpostHandler(Handler):
 
             if subject and content:
                 post = Post(subject=subject, content=content, username = self.user.username, user = self.user.key().id())            
-                post.put()
+                post.put()                
                 self.redirect("/blog")
             else:
                 self.render_form(subject, content, "Please provide a title and content", user=self.user.username)
 
 class DeletepostHandler(Handler):    
     def post(self):
-        self.login()
-        user = None
-        if self.user: user = self.user.username            
-        if user:
+        self.login()            
+        if self.user:
             post = self.request.get("post")
-            post = Post.get_by_id(int(post))
-            if post:
+            if post.isdigit():
+                post = Post.get_by_id(int(post))
+            else:
+                post = None
+            
+            if post and (post.user == self.user.key().id() or self.user.isadmin):
                 post.delete()
+        
         self.redirect("/blog")
         
 class EditPostHandler(Handler):
     def get(self, resource):
         self.login()
-        user = None
-        if self.user: user = self.user.username
-                
-        post = Post.get_by_id(int(resource))
-        post_user = None      
-        if post: post_user = post.username
         
-        if user == post_user:
-            self.render("newpost.html", user = user, 
-                                        subject=post.subject, 
-                                        content=post.content)
+        
+        if self.user and resource.isdigit():
+            post = Post.get_by_id(int(resource))      
+            
+            if post and (post.user == self.user.key().id() or self.user.isadmin):
+                self.render("newpost.html", user = self.user.username, 
+                                            subject=post.subject, 
+                                            content=post.content)
         else:
             self.redirect('/login')
             
     def post(self, ID):
         self.login()
-        user = None
-        if self.user: user = self.user.username
         
-        post = Post.get_by_id(int(ID))
-        post_user = None      
-        if post: post_user = post.username
-        
-        if user == post_user:            
-            subject = self.request.get("subject")
-            content = self.request.get("content")            
+        if self.user and ID.isdigit():        
+            post = Post.get_by_id(int(ID))           
+            if post and (self.user.key().id() == post.user or self.user.isadmin):            
+                subject = self.request.get("subject")
+                content = self.request.get("content")            
 
-            if subject and content:                
-                post.subject = subject
-                post.content = content        
-                post.put()
-                self.redirect("/blog")              
-            else:
-                self.render_form(subject, content, "Please provide a title and content", user=user)
+                if subject and content:                
+                    post.subject = subject
+                    post.content = content        
+                    post.put()
+                    self.redirect("/blog")              
+                else:
+                    self.render_form(subject, content, "Please provide a title and content", user=user)
+        else:
+            self.redirect("/login")
         
 class CalendarHandler(Handler):
     def get(self):

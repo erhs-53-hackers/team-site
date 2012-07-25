@@ -104,13 +104,13 @@ label {font-size: 1.1em; height: 25px; line-height: 25px;}
         
 /* Messages classes */
 .req {color: #C74350;}
-.error,.notice, .success {
+.notice, .success {
         padding: .2em;
         margin-bottom: 1em;
         border: 2px solid #ddd;
 }
 
-.error {background: #FBE3E4; border-color: #FBC2C4; color: #8a1f11;}
+.error {color: #8a1f11;}
 .notice {background: #FFF6BF; border-color: #FFD324; color: #514721;}
 .success {background: #E6EFC2; border-color: #C6D880; color: #264409;}
 

@@ -36,9 +36,7 @@ margin-bottom: .8em; }
 /* Anchors */ 
 a {
 outline: 0;} 
-a img {
-border: 0px; 
-text-decoration: none;} 
+
 a:link, a:visited { 
 color: #0099ff;
 padding: 0 1px; 
@@ -210,8 +208,7 @@ border-radius: 10px;
 -moz-border-radius: 10px; 
 -webkit-border-radius: 10px; }
 
-#content a {
-background: none;}
+
 
 #cotent p {
 background: none;} /* Doesn't work */
@@ -344,16 +341,41 @@ form {
 	font-size: 1.517em;
 }
 .remove-button {
+	background: url(../images/delete.png) no-repeat top;
 	width: 20px;
 	height: 20px;
 	padding: 0px;
+	float: right;	
+	border: none;	
 	padding-top: 1px;
-	background-color: #000305;
-	color: #9E0517;
+	-o-background-size:100% 100%;             /*  Opera  */
+    -webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*not working in Firefox as yet */
+	
+	
 }
 .remove-button:hover {
 	color:#FF001E;	
 }
+
+.edit-button {
+	display: block;
+	background: url(../images/edit.png) no-repeat top;
+	width: 20px;
+	height: 20px;
+	float: right;
+	border: none;	
+	padding-top: 1px;
+	-o-background-size:100% 100%;             /*  Opera  */
+    -webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*not working in Firefox as yet */
+
+
+}
+
+
 
 #admin-login { 
 background: #000305; 
