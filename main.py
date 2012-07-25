@@ -73,18 +73,12 @@ class LogoutHandler(Handler):
 class MembersHandler(Handler):
      def get(self):        
         self.login()
-        user = None
-        if self.user: user = self.user.username
-               
-                      
-        self.render("members.html", user = user)
+        self.render("members.html", user = self.user)
         
 
      def post(self):
-        cookie = self.request.cookies.get("user_id")
-        user = authenticate_cookie(cookie)
-        if user: user = get_user(user)
-        if user and user.isadmin:
+        self.login()        
+        if self.user and self.user.isadmin:
             username = self.request.get('username')
             password = self.request.get('password')
             verify = self.request.get('verify')
@@ -124,7 +118,7 @@ class MembersHandler(Handler):
                 if not v_email: m_email = 'not a valid email.'
                 if v_existing_user > 0: m_user = 'That user already exists.'
                 
-                self.render("members.html", user = user,
+                self.render("members.html", user = self.user,
                             email = m_email,
                             username = m_user,
                             password =  m_pass,
