@@ -227,5 +227,54 @@ font-size: 1.286em;}
 
 #about .copyright {float:right; width: auto;}
 
+/* Login *****************/
+form {
+	width: 100%;}
+.button {
+	padding: 5px;
+	background-color: #000305;
+	color: #00ff00;
+	background: #000305;
+	font-size: 1.517em;
+}
+.remove-button {
+	background: url(../images/delete.png) no-repeat top;
+	width: 20px;
+	height: 20px;
+	padding: 0px;
+	float: right;	
+	border: none;	
+	padding-top: 1px;
+	-o-background-size:100% 100%;             /*  Opera  */
+    -webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*not working in Firefox as yet */
+}
+.remove-button:hover {
+	color:#FF001E;	
+}
+.edit-button {
+	display: block;
+	background: url(../images/edit.png) no-repeat top;
+	width: 20px;
+	height: 20px;
+	float: right;
+	border: none;	
+	padding-top: 1px;
+	-o-background-size:100% 100%;             /*  Opera  */
+    -webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*not working in Firefox as yet */
+}
 
+#admin-login { 
+background: #000305; 
+margin-bottom: 2em; 
+overflow: hidden; 
+padding: 20px 20px; 
+width: 760px;  
+border-radius: 10px; 
+-moz-border-radius: 10px; 
+-webkit-border-radius: 10px; }
+	
 
