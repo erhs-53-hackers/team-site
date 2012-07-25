@@ -82,11 +82,14 @@ class MembersHandler(Handler):
             password = self.request.get('password')
             verify = self.request.get('verify')
             email = self.request.get('email')
-            #image = self.request.get('image')
-            #logging.error("image: %s" % image)         
-            #image = images.resize(image, 32, 32)
-            #image = db.Blob(image)
-            
+            image = self.request.get('image')
+            if image:
+                image = images.resize(image, 100, 100)
+                image = db.Blob(image)
+                logging.error("YES!!! image")
+            else:
+                logging.error("NO!!!! image")
+                        
             v_user = match(USER, username)
             v_pass = match(PASS, password)
             v_verify = None
@@ -101,7 +104,7 @@ class MembersHandler(Handler):
 
             if v_user and v_pass and v_verify and v_email and v_existing_user < 1:
                 password = make_pw_hash(username, password)
-                newuser = User(username=username, password=password, email = email, isadmin=False)
+                newuser = User(username=username, password=password, email = email, isadmin=False, userimage=image)
                 newuser.put()
                 user_id = make_secure_val(str(newuser.key().id()))
                 self.response.headers.add_header('Set-Cookie', 'user_id=%s' % user_id)
@@ -235,7 +238,7 @@ class SponsorsHandler(Handler):
         
 class ImageHandler(Handler):
     def get(self):
-        user = User.get_by_id(int(self.request.get("id")))
+        user = db.get(self.request.get("id"))
         if user.userimage:
             self.response.headers['Content-Type'] = "image/png"
             self.response.out.write(user.userimage)
