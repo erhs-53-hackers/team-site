@@ -223,6 +223,23 @@ class AboutHandler(Handler):
         if self.user: user = self.user.username
             
         self.render("about.html", user = user)
+
+class ContactHandler(Handler):
+    def get(self):
+        self.login()
+        user = None
+        if self.user: user = self.user.username
+        
+        self.render("contact.html", user = user)
+
+class SponsorsHandler(Handler):
+    def get(self):
+        self.login()
+        user = None
+        if self.user: user = self.user.username
+
+        self.render("sponsors.html", user = user)
+
         
 class ImageHandler(Handler):
     def get(self):
@@ -240,6 +257,8 @@ app = webapp2.WSGIApplication([('/', MainHandler),
                                ('/logout', LogoutHandler),
                                ('/newpost', NewpostHandler),
                                ('/members', MembersHandler),
+                               ('/contact', ContactHandler),
+                               ('/sponsors', SponsorsHandler),
                                ('/deletepost', DeletepostHandler),
                                ('/editpost/(\d+)', EditPostHandler),
                                ('/calendar', CalendarHandler),
