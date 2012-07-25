@@ -48,10 +48,7 @@ label {font-size: 1.1em; height: 25px; line-height: 25px;}
                 color: #0d0d0d;
         }
         
-        input[type='checkbox'], input[type='radio'] {
-                display: block;
-                margin-top: 4px;
-        }
+       
         
         input[type='submit'] {
                 background: #C74350;
