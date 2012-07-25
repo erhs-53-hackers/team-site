@@ -9,7 +9,7 @@
 
 /* Body */
 body {
-background-color: #6699cc;
+background-color: #46f;/*#6699cc;*/
 color: #fff;
 font-size: 100%;
 line-height: 1.5;
@@ -34,22 +34,18 @@ margin-bottom: .8em;
 
 /* anchors */
 a {
-outline: 0;
-} 
+outline: 0;} 
 a img {
 border: 0px; 
-text-decoration: none;
-} 
+text-decoration: none;} 
 a:link, a:visited { 
 color: #f90;
-text-decoration: underline; 
-} 
+text-decoration: underline; } 
 a:hover, a:active { 
 background-color: none; 
 color: #c60; 
 text-decoration: none; 
-text-shadow: 1px 1px 1px #333; 
-}  
+text-shadow: 1px 1px 1px #333; }  
 
 /* paragraphs */
 p {
@@ -159,13 +155,11 @@ list-style: none;
 margin: 0;} 
 #extras li {
 border-bottom: 1px solid #fff;} 
-
 #extras h2 { 
 color: #f90; 
 font-size: 1.429em; 
 margin-bottom: .25em; 
 padding: 0 3px; }
-  
 #extras a:link, #extras a:visited { 
 color: #fff; 
 display: block; 
@@ -183,11 +177,8 @@ width: 750px; }
 #extras .social { 
 float: right; 
 width: 175px; }
-
 #extras li:last-child, /* last <li>*/ #extras li:last-child a /* <a> of last <li> */ {border: 0}
-
 #extras .blogroll li:nth-last-child(2), #extras .blogroll li:nth-last-child(3), #extras .blogroll li:nth-last-child(2) a, #extras .blogroll li:nth-last-child(3) a {border: 0;}
-
 #extras div[class='social'] a { background-repeat: no-repeat; background-position: 3px 6px; padding-left: 25px; }  
 /* Icons */ 
 .social a[href*='facebook.com'] {background-image: url('../images/icons/facebook.png');} 
@@ -207,24 +198,19 @@ width: 920px;
 border-radius: 10px; 
 -moz-border-radius: 10px; 
 -webkit-border-radius: 10px; }  
-
 /* Footer *****************/ 
 #contentinfo {
 padding-bottom: 2em; text-align: right;}
 #contentinfo p{
 float: right;}
-
 #about .primary {
 float: left; 
 width: 190px;} 
-
 #about .primary strong {
 color: #f90; 
 display: block; 
 font-size: 1.286em;} 
- 
 #about .bio {float: right; width: 700px;}  
-
 #about .copyright {float:right; width: auto;}
 
 /* Login *****************/
