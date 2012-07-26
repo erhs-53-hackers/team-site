@@ -15,7 +15,7 @@
 		<div id="container">
 			<aside id="login">
 				{% if user %}		
-				<div align="right">{{user.username}}(<a href="/logout">logout</a>)</div>
+				<div align="right"><a class="profile-link" href="/profile/{{user.username}}">{{user.username}}</a>(<a href="/logout">logout</a>)</div>
 				{% else %}
 				<div align="right"><a href="/login">User Login</a></div>
 				{% endif %}
@@ -72,7 +72,7 @@
 							<tr>
 								<td>
 								Quote:<br>
-								<textarea name="quote" rows="5" cols="50">{{profile.quote}}</textarea>
+								<textarea name="quote" rows="5" cols="50">{% if profile.quote %}{{profile.quote}}{% endif %}</textarea>
 								</td>								
 							</tr>						
 							
@@ -105,6 +105,14 @@
 								</td>
 								<td>
 								<textarea name="pastProjects" rows="6" cols="60">{{pastProjects}}</textarea>
+								</td>
+							</tr>
+							<tr>
+								<td>
+								Email:
+								</td>
+								<td>
+								<input type="text" style="width=99%;" name="email" value="{% if profile.email %}{{profile.email}}{% endif %}">
 								</td>
 							</tr>
 										

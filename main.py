@@ -319,6 +319,7 @@ class EditProfileHandler(Handler):
             team         = self.request.get("team")
             currentProjs = self.request.get("currentProjects")
             pastProjs    = self.request.get("pastProjects")
+            email        = self.request.get("email")
             
             currentProjs = currentProjs.split(',')
             for i in range(len(currentProjs)):
@@ -332,6 +333,7 @@ class EditProfileHandler(Handler):
             profile.team            = team
             profile.currentProjects = currentProjs
             profile.pastProjects    = pastProjs
+            profile.email           = email
             
             profile.put()
             

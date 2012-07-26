@@ -14,7 +14,7 @@
 		<div id="container">
 			<aside id="login">
 				{% if user %}		
-				<div align="right">{{user.username}}(<a href="/logout">logout</a>)</div>
+				<div align="right"><a class="profile-link" href="/profile/{{user.username}}">{{user.username}}</a>(<a href="/logout">logout</a>)</div>
 				{% else %}
 				<div align="right"><a href="/login">User Login</a></div>
 				{% endif %}
@@ -103,7 +103,14 @@
 							{% endfor %}
 							</td>
 						</tr>
-						{% endif %}			
+						{% endif %}	
+						{% if user and profile.email %}
+						<tr>
+							<td colspan="2">
+							Email: {{profile.email}}
+							</td>							
+						</tr>
+						{% endif %}		
 					</tbody>
 				</table>
 			</section>
