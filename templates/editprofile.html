@@ -5,7 +5,8 @@
 		<title>Eleanor Roosevelt Engineering and Robotics</title>
 		<link rel="stylesheet" href="../css/main.css">
 		<link rel="stylesheet" href="../css/nav.css">
-		<link rel="stylehseet" href="../css/banner.css">
+		
+		<link rel="style">
 		<!--[if IE]>
 			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -52,60 +53,65 @@
 			  </ul>
 			</nav>
 			<section id="content">
-				{% if user and profile.key().id() == user.key().id() %}
-				<a class="edit-button" href="/editprofile/{{profile.username}}" title="edit"></a>
-				{% endif %}
-				<table border=1>		
-					<tbody>
-						<tr>
-							<td rowspan="2">
-								{% if profile.userimage %}
-								<img id="profile-pic" src="/image?id={{profile.key()}}">
-								{% else %}
-								<img id="profile-pic" src="/images/alien-head.jpg">		
-								{% endif %}
+				<form method="POST">
+					<table border=1>
+						<tbody>
+							<tr>
+								<td rowspan="2">
+									{% if profile.userimage %}
+									<img id="profile-pic" src="/image?id={{profile.key()}}">
+									{% else %}
+									<img id="profile-pic" src="/images/alien-head.jpg">		
+									{% endif %}
 							
-							</td>
-							<td>
-								<div id="profile-name">{{profile.username}}</div>
-							</td>					
-						</tr>
-						{% if profile.quote %}
-						<tr>
-							<td>
-							{{profile.quote}}
-							</td>
-						</tr>
-						{% endif %}
-						{% if profile.team %}
-						<tr>
-							<td colspan="2">
-							Team: {{ profile.team }}
-							</td>
-						</tr>
-						{% endif %}
-						{% if profile.currentProjects %}
-						<tr>
-							<td colspan="2">
-							Current project(s): {{profile.currentProjects[0]}}
-							{% for project in profile.currentProjects[1:] %}
-							, {{project}}
-							{% endfor %}
-							</td>
-						</tr>
-						{% endif %}
-						{% if profile.pastProjects %}
-						<tr>
-							<td colspan="2">
-							Past projects: {{profile.pastProjects[0]}}
-							{% for project in profile.pastProjects[1:] %}
-							, {{project}}
-							{% endfor %}
-							</td>
-						</tr>
-						{% endif %}			
-					</tbody>
-				</table>
+								</td>
+								<td>
+									<div id="profile-name">{{profile.username}}</div>
+								</td>					
+							</tr>						
+							<tr>
+								<td>
+								Quote:<br>
+								<textarea name="quote" rows="5" cols="50">{{profile.quote}}</textarea>
+								</td>								
+							</tr>						
+							
+							<tr>
+								<td>
+								Team:
+								</td>
+								<td>
+								<select name="team">
+									<option value="Programming" {{prog}}>Programming</option>
+									<option value="Mecanical" {{mec}}>Mecanical</option>
+									<option value="Outreach" {{out}}>Outreach</option>
+									<option value="Managment" {{mang}}>Managment</option>
+								</select>
+								</td>
+							</tr>
+							
+							
+							<tr>
+								<td>
+								Current project(s):
+								</td>
+								<td>
+								<input type="text" style="width:99%;" name="currentProjects" value="{{currentProjects}}">
+								</td>
+							</tr>
+							<tr>
+								<td>								
+								Past projects:
+								</td>
+								<td>
+								<textarea name="pastProjects" rows="6" cols="60">{{pastProjects}}</textarea>
+								</td>
+							</tr>
+										
+						</tbody>
+					</table>
+					<input type="submit" value="Save Profile">
+				</form>
 			</section>
 			
 		

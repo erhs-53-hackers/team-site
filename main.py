@@ -262,6 +262,88 @@ class ProfileHandler(Handler):
             self.render("profile.html", user = self.user, profile = profile[0])
         else:
             self.error(404)
+            
+class EditProfileHandler(Handler):
+    def get(self, res):
+        self.login()
+        profile = db.GqlQuery("SELECT * FROM User WHERE username=:1 LIMIT 1", res)
+        profile = list(profile)
+        if len(profile) == 1:
+            profile = profile[0]
+            if self.user.key().id() == profile.key().id():
+                prog = ""
+                mec  = ""
+                out  = ""
+                mang = ""
+                
+                if profile.team == "Programming":
+                    prog = 'selected="selected"'
+                elif profile.team == "Mecanical":
+                    mec  = 'selected="selected"'
+                elif profile.team == "Outreach":
+                    out  = 'selected="selected"'
+                elif profile.team == "Managment":
+                    mang = 'selected="selected"'
+                    
+                currentProjects = ""
+                                
+                for i in range(len(profile.currentProjects)):
+                    if i == 0:
+                        currentProjects += profile.currentProjects[i]
+                    else:
+                        currentProjects += ", " + profile.currentProjects[i]
+                        
+                pastProjects = ""
+                                
+                for i in range(len(profile.pastProjects)):
+                    if i == 0:
+                        pastProjects += profile.pastProjects[i]
+                    else:
+                        pastProjects += ", " + profile.pastProjects[i]
+                    
+                
+                self.render("editprofile.html", user = self.user, profile = profile,
+                            currentProjects=currentProjects ,pastProjects=pastProjects,
+                            prog=prog, mec=mec, out=out, mang=mang)
+            else:
+                self.redirect("/login")
+        else:
+            self.error(404)
+    def post(self, res):
+        self.login()        
+        profile = db.GqlQuery("SELECT * FROM User WHERE username=:1 LIMIT 1", res)
+        profile = list(profile)
+        if len(profile) == 1 and self.user and self.user.key().id() == profile[0].key().id():
+            profile = profile[0]
+            quote        = self.request.get("quote")
+            team         = self.request.get("team")
+            currentProjs = self.request.get("currentProjects")
+            pastProjs    = self.request.get("pastProjects")
+            
+            currentProjs = currentProjs.split(',')
+            for i in range(len(currentProjs)):
+                currentProjs[i] = currentProjs[i].strip()
+            
+            pastProjs = pastProjs.split(',')
+            for i in range(len(pastProjs)):
+                pastProjs[i] = pastProjs[i].strip()
+            
+            profile.quote           = quote
+            profile.team            = team
+            profile.currentProjects = currentProjs
+            profile.pastProjects    = pastProjs
+            
+            profile.put()
+            
+            self.redirect("/profile/%s" % res)
+        else:
+            self.redirect("/login")
+            
+        
+       
+                
+        
+        
         
         
 
@@ -279,5 +361,6 @@ app = webapp2.WSGIApplication([('/', MainHandler),
                                ('/image', ImageHandler),
                                ('/about', AboutHandler),
                                ('/profile/(.+)', ProfileHandler),
+                               ('/editprofile/(.+)', EditProfileHandler),
                                ('/programming', ProgrammingHandler)],
                                debug=True)
