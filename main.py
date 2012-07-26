@@ -21,11 +21,9 @@ import datetime
 
 class MainHandler(Handler):
     def get(self):
-        self.login()
-        user = None
-        if self.user: user = self.user.username        
+        self.login()            
         
-        self.render("index.html", user = user)
+        self.render("index.html", user = self.user)
 class BlogHandler(Handler):
     def get(self):
         self.login()
@@ -39,12 +37,10 @@ class BlogHandler(Handler):
 class LoginHandler(Handler):
      def get(self):
         self.login()
-        user = None
-        if self.user: user = self.user.username
-        
-        self.render('login.html', user = user, remember = "false")
+                
+        self.render('login.html', user = self.user, remember = "false")
 
-     def post(self):
+     def post(self):        
         username = self.request.get('username')
         password = self.request.get('password')
         remember = self.request.get('remember')       
@@ -138,10 +134,9 @@ class NewpostHandler(Handler):
         self.render("newpost.html", subject=subject, content=content, error=error, user=user)
     def get(self):
         self.login()
-        user = None
-        if self.user: user = self.user.username
-        if user:
-            self.render_form(user = user)
+        
+        if self.user:
+            self.render_form(user = self.user)
         else:
             self.redirect("/login")
         
@@ -176,8 +171,7 @@ class DeletepostHandler(Handler):
         
 class EditPostHandler(Handler):
     def get(self, resource):
-        self.login()
-        
+        self.login()        
         
         if self.user and resource.isdigit():
             post = Post.get_by_id(int(resource))      
@@ -210,44 +204,33 @@ class EditPostHandler(Handler):
         
 class CalendarHandler(Handler):
     def get(self):
-        self.login()
-        user = None
-        if self.user: user = self.user.username
+        self.login()           
             
-            
-        self.render("calendar.html", user = user)
+        self.render("calendar.html", user = self.user)
         
 class AboutHandler(Handler):
     def get(self):
-        self.login()
-        user = None
-        if self.user: user = self.user.username
+        self.login()        
             
-        self.render("about.html", user = user)
+        self.render("about.html", user = self.user)
 
 class ContactHandler(Handler):
     def get(self):
         self.login()
-        user = None
-        if self.user: user = self.user.username
-        
-        self.render("contact.html", user = user)
+                
+        self.render("contact.html", user = self.user)
 
 class SponsorsHandler(Handler):
     def get(self):
-        self.login()
-        user = None
-        if self.user: user = self.user.username
+        self.login()        
 
-        self.render("sponsors.html", user = user)
+        self.render("sponsors.html", user = self.user)
 
 class ProgrammingHandler(Handler):
     def get(self):
-        self.login()
-        user = None
-        if self.user: user = self.user.username
+        self.login()        
         
-        self.render("programming.html", user = user)
+        self.render("programming.html", user = self.user)
 
         
 class ImageHandler(Handler):
