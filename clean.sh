@@ -1,4 +1,4 @@
-rm *.*~
-rm *~
-rm *.pyc
+rm -rf *.*~
+rm -rf *~
+rm -rf *.pyc
 

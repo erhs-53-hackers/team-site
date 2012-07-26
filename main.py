@@ -84,7 +84,7 @@ class MembersHandler(Handler):
             email = self.request.get('email')
             image = self.request.get('image')
             if image:
-                image = images.resize(image, 100, 100)
+                image = images.resize(image, 300, 300)
                 image = db.Blob(image)
                 logging.error("YES!!! image")
             else:
@@ -244,6 +244,17 @@ class ImageHandler(Handler):
             self.response.out.write(user.userimage)
         else:
             self.error(404)
+            
+class ProfileHandler(Handler):
+    def get(self, res):
+        self.login()
+        profile = db.GqlQuery("SELECT * FROM User WHERE username=:1 LIMIT 1", res)
+        profile = list(profile)
+        if len(profile) == 1:
+            self.render("profile.html", user = self.user, profile = profile[0])
+        else:
+            self.error(404)
+        
         
 
 app = webapp2.WSGIApplication([('/', MainHandler),
@@ -258,5 +269,6 @@ app = webapp2.WSGIApplication([('/', MainHandler),
                                ('/editpost/(\d+)', EditPostHandler),
                                ('/calendar', CalendarHandler),
                                ('/image', ImageHandler),
-                               ('/about', AboutHandler)],
+                               ('/about', AboutHandler),
+                               ('/profile/(.+)', ProfileHandler)],
                               debug=True)

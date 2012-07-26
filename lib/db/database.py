@@ -18,10 +18,14 @@ class Post(db.Model):
     created  = db.DateTimeProperty(auto_now_add = True)
     
 class User(db.Model):
-    userimage = db.BlobProperty()
-    username  = db.StringProperty(required = True)
-    password  = db.StringProperty(required = True)
-    email     = db.StringProperty()
-    isadmin   = db.BooleanProperty(required = True)
+    currentProjects = db.StringListProperty()
+    pastProjects    = db.StringListProperty()
+    team            = db.StringProperty()
+    quote           = db.TextProperty()
+    userimage       = db.BlobProperty()
+    username        = db.StringProperty(required = True)
+    password        = db.StringProperty(required = True)
+    email           = db.StringProperty()
+    isadmin         = db.BooleanProperty(required = True)
 
     

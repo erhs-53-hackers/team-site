@@ -20,7 +20,7 @@
 	
 	<body id="index" class="home">
 		{% if user %}		
-		<div align="right">{{user}}(<a href="/logout">logout</a>)</div>
+		<div align="right"><a id="profile-link" href="/profile/{{user}}">{{user}}</a>(<a href="/logout">logout</a>)</div>
 		{% else %}
 		<div align="right"><a href="/login">User Login</a></div>
 		{% endif %}
