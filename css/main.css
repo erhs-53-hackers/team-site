@@ -68,7 +68,7 @@ dd {margin-left: 1.5em;}
 */
 
 /* Quotes */ blockquote {font-style: italic;} cite {}  q {}  
-/* Tables */  
+/* Tables */ 
 /* Thead */ thead th {padding: .5em .4em; text-align: left;} thead td {}  
 /* Tbody */ tbody td {padding: .5em .4em;} tbody th {}  tbody .alt td {} tbody .alt th {}  
 /* Tfoot */ tfoot th {} tfoot td {}
@@ -326,16 +326,15 @@ color: #c60;}
     -moz-background-size:100% 100%;           /*not working in Firefox as yet */
 }
 
-#admin-login { 
+#members { 
 background: #000305; 
 margin-bottom: 2em; 
 overflow: hidden; 
 padding: 20px 20px; 
-width: 760px;  
+width: 920px;  
 border-radius: 10px; 
 -moz-border-radius: 10px; 
 -webkit-border-radius: 10px; }
-
 
 #profile-link {
 	color: white;
