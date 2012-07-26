@@ -142,6 +142,11 @@ color: #f90;}
 border-bottom: 1px solid #eee; 
 padding: 1em 0; 
 }
+#content h3 {
+font-size: 1.143em;
+color: #c60;
+padding-left: 15px;
+margin-bottom: .1em;}
 li:last-child .entry, #content > .entry {
 border: 0; 
 margin: 0;} 

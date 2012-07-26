@@ -61,8 +61,8 @@
 		{% endif %}
 		<section id="content">
 			<ol>
-				<li><article class="entry">
-					{% for post in posts%}
+				{% for post in posts%}
+					<li><article class="entry">
 						{% if user %}
 						{% if user.key().id() == post.user or user.isadmin%}
 						<form method="POST" action="/deletepost">
@@ -71,16 +71,16 @@
 						</form>
 						<a class="edit-button" href="/editpost/{{post.key().id()}}"></a>
 						{% endif %}
-						
 						{% endif %}
-						<h2>{{post.subject}}</h2><br>
-						Created by: {{post.username}}<br>
-						Date: {{post.created}}
+						<hgroup>
+							<h2>{{post.subject}}</h2>
+							<h3>Created by: {{post.username}}</h3>
+							<h3>Date: {{post.created}}</h3>
+						</hgroup>
 						<hr>
-						<p>{{post.content}}
-						ffasfsadfsdafsdfsdafasdfsdfsadfasddf</p>
+						<p>{{post.content}}</p>
 					</article></li>			
-					{% endfor %}
+				{% endfor %}
 			</ol>
 		</section>
 			<footer id="contentinfo">
