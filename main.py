@@ -235,6 +235,14 @@ class SponsorsHandler(Handler):
 
         self.render("sponsors.html", user = user)
 
+class ProgrammingHandler(Handler):
+    def get(self):
+        self.login()
+        user = None
+        if self.user: user = self.user.username
+        
+        self.render("programming.html", user = user)
+
         
 class ImageHandler(Handler):
     def get(self):
@@ -258,5 +266,6 @@ app = webapp2.WSGIApplication([('/', MainHandler),
                                ('/editpost/(\d+)', EditPostHandler),
                                ('/calendar', CalendarHandler),
                                ('/image', ImageHandler),
-                               ('/about', AboutHandler)],
+                               ('/about', AboutHandler),
+                               ('/programming', ProgrammingHandler)],
                               debug=True)
