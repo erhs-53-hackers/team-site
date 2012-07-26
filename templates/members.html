@@ -6,9 +6,13 @@
 		<link rel="stylesheet" href="../css/main.css">
 		<link rel="stylesheet" href="../css/nav.css">
 		<link rel="stylehseet" href="../css/banner.css">
+		<script type="text/javascript" src="../js/jquery.js"></script>
+		<script src="../js/modernizr.js"></script>
 		<!--[if IE]>
 			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
+		
+			
 	</head>
 	<body class="no-js">
 		<div id="container">
@@ -51,10 +55,12 @@
 				  <li class="last"><a href="/gallery" title="Photo Gallery">Gallery</a></li>
 			  </ul>
 			</nav>
+			
 		{% if user.isadmin %}
+		
 		<section id="members">
-			<h1>Create User</h1>
-			<form method="post" enctype="multipart/form-data">
+			<button id="createuserbutton" type="button">Create User</button>			
+			<form id="createuser" style="display: none;" method="post" enctype="multipart/form-data">
 			<table>
 				<tr>
 				  <td class="label">
@@ -115,8 +121,19 @@
 
 			<input type="submit">
 			</form>
+			<script>
 			
-		</section><!-- /#content -->
+			(function($){
+			$("#createuserbutton").toggle(function(){
+					$("#createuser").show('medium');
+			 	}, function(){
+			   		$("#createuser").hide('fast');
+			 	}
+			 );
+			 })(jQuery);
+		</script>
+			
+		</section><!-- /#content -->			
 		{% endif %}	
 			<footer id="contentinfo">
 				<address id="about">
@@ -130,9 +147,7 @@
 					</span><!-- /.bio -->
 				</address><!-- /#about -->
 				<p><a href="http://www.team53.org/">ERHS Engineering</a> | 2012</p>
-			</footer><!-- /#contentinfo -->
-			<script src="../js/jquery.js"></script>
-			<script src="../js/modernizr.js"></script>
+			</footer><!-- /#contentinfo -->			
 	        <script>
 			(function($){
 				
