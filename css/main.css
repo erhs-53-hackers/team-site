@@ -9,7 +9,7 @@
 
 /* Body */
 body {
-background-color: #46f;/*#6699cc;*/
+background-color: #00f;/*#6699cc;*/
 color: #fff;
 font-size: 100%;
 line-height: 1.5;
@@ -148,7 +148,7 @@ margin: 0;}
 
 /* Extras *****************/ 
 #extras {
-margin: 0em auto 3em auto; 
+margin: 0em auto 1.5em auto; 
 overflow: hidden;}  
 #extras ul {
 list-style: none; 
@@ -190,7 +190,7 @@ width: 175px; }
 #about { 
 background: #000;
 font-style: normal; 
-margin-bottom: 2em; 
+margin-bottom: 1em; 
 overflow: hidden; 
 padding: 20px; 
 text-align: left; 
@@ -212,6 +212,42 @@ display: block;
 font-size: 1.286em;} 
 #about .bio {float: right; width: 700px;}  
 #about .copyright {float:right; width: auto;}
+
+#media-display {
+background: #000;
+color: #fff;
+margin-bottom: 2em; 
+text-align: center;
+overflow: hidden; 
+padding: 20px; 
+width: 920px;  
+line-height: 1.5;
+border-radius: 10px; 
+-moz-border-radius: 10px; 
+-webkit-border-radius: 10px; }  
+#media-display figure { 
+border: 2px solid #eee;
+float: center; 
+margin: .786em 3em 50 5em; 
+margin-left: 50px;
+width: 810px; 
+height: 455px; } 
+#media-display figure img {
+display: block; 
+float: center;}  
+#media-display figure iframe {
+width: 100%;
+height: 100%;
+float: left;}
+#media-display h2 {
+color: #f90; 
+text-decoration: none;
+font-size: 1.714em; 
+margin-bottom: 0.333em;} 
+#media-display h3 {
+color: #f90;
+font-size: 1.429em; 
+margin-bottom: .5em;}
 
 /* Login *****************/
 form {
