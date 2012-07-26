@@ -268,9 +268,12 @@ border-radius: 10px;
 -moz-border-radius: 10px; 
 -webkit-border-radius: 10px; } 
 #blog-entry h2 {
-color: #0f0;}
+color: #f90;}
 #blog-entry h3 {
-color: #0ff;}
+color: #c60;
+padding: 0px;
+margin-bottom: 0;
+font-size: 1.143em;}
 #blog-entry p {
 width: 100%;
 overflow: wrap;
