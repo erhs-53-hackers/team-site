@@ -1,5 +1,5 @@
 /*
- * Main.css v. 1
+ * Main.css v. 3
  * ERHS Engineering Site
  * @authors: Nick
  * July 2012
@@ -252,13 +252,19 @@ margin-bottom: .5em;}
 /* Login *****************/
 form {
 	width: 100%;}
+.label {
+color: #f90;}
 .button {
 	padding: 5px;
-	background-color: #000305;
-	color: #00ff00;
-	background: #000305;
-	font-size: 1.517em;
+	background-color: #222;
+	color: #f90;
+	font-size: 1.143em;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
 }
+.button:hover {
+color: #c60;}
 .remove-button {
 	background: url(../images/delete.png) no-repeat top;
 	width: 20px;

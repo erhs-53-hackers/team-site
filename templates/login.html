@@ -56,27 +56,23 @@
 				
 <table>
   <tr>
-    <td class="label">
-    Username: 
-    </td>
-    <td>
-    <input type="text" name="username" value="{{username}}">
-    </td>    
+    <td class="label">Username: </td>
+    <td><input type="text" name="username" value="{{username}}"></td>    
   </tr>
   <tr>
-    <td class="label">
-    Password: 
-    </td>
-    <td>
-    <input type="password" name="password" value="{{password}}">
-    </td>    
+    <td class="label">Password: </td>
+    <td><input type="password" name="password" value="{{password}}"></td>    
+  </tr>
+  <tr>
+	<td class="label">Remeber me?</td>
+	<td><input type="checkbox" name="remember" value="true"></td>
+  </tr>
+  <tr>
+	<td><input type="submit" class="button"></td>
+	<td><div class="error">{{error}}</div></td>
   </tr>
 </table>
 
-<div class="error">{{error}}</div>
-Stay logged in: <input type="checkbox" name="remember" value="true">
-<br><br>
-<input type="submit"> 
 </form>
 			
 		</section><!-- /#content -->	

@@ -53,35 +53,36 @@
 			</nav>
 			
 		{% if user %}
-		<section id="content" class="body">
+		<section id="new-post">
 			<form action="/newpost" method="GET">
 				<button class="button" id="submit">New Post</button>
 			</form>
-			
-		</section><!-- /#content -->
+		</section>
 		{% endif %}
-		
-		{% for post in posts%}
-		<section id="content" class="body">			
-			
-			{% if user %}
-			{% if user.key().id() == post.user or user.isadmin%}
-			<form method="POST" action="/deletepost">
-				<input type="hidden" name="post" value="{{post.key().id()}}">
-				<a class="remove-button" href="#" onclick="parentNode.submit()"></a>				
-			</form>
-			<a class="edit-button" href="/editpost/{{post.key().id()}}"></a>
-			{% endif %}
-			
-			{% endif %}
-			<h1>{{post.subject}}</h1><br>
-			Created by: {{post.username}}<br>
-			Date: {{post.created}}
-			<hr>
-			<pre>{{post.content}}</pre>			
-		</section><!-- /#content -->
-		{% endfor %}
-	
+		<section id="content">
+			<ol>
+				<li><article class="entry">
+					{% for post in posts%}
+						{% if user %}
+						{% if user.key().id() == post.user or user.isadmin%}
+						<form method="POST" action="/deletepost">
+							<input type="hidden" name="post" value="{{post.key().id()}}">
+							<a class="remove-button" href="#" onclick="parentNode.submit()"></a>				
+						</form>
+						<a class="edit-button" href="/editpost/{{post.key().id()}}"></a>
+						{% endif %}
+						
+						{% endif %}
+						<h2>{{post.subject}}</h2><br>
+						Created by: {{post.username}}<br>
+						Date: {{post.created}}
+						<hr>
+						<p>{{post.content}}
+						ffasfsadfsdafsdfsdafasdfsdfsadfasddf</p>
+					</article></li>			
+					{% endfor %}
+			</ol>
+		</section>
 			<footer id="contentinfo">
 				<address id="about">
 					<span class="primary">
