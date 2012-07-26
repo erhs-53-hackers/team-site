@@ -9,6 +9,7 @@
 
 /* Body */
 body {
+background: url("../images/bg.png");
 background-color: #00f;/*#6699cc;*/
 color: #fff;
 font-size: 100%;
