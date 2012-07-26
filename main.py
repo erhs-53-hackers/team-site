@@ -320,6 +320,11 @@ class EditProfileHandler(Handler):
             currentProjs = self.request.get("currentProjects")
             pastProjs    = self.request.get("pastProjects")
             email        = self.request.get("email")
+            image        = self.request.get("image")
+            
+            if image:
+                image = images.resize(image, 300, 300)
+                image = db.Blob(image)
             
             currentProjs = currentProjs.split(',')
             for i in range(len(currentProjs)):
@@ -333,7 +338,8 @@ class EditProfileHandler(Handler):
             profile.team            = team
             profile.currentProjects = currentProjs
             profile.pastProjects    = pastProjs
-            profile.email           = email
+            profile.email           = email            
+            if image: profile.userimage = image
             
             profile.put()
             

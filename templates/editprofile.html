@@ -53,7 +53,7 @@
 			  </ul>
 			</nav>
 			<section id="content">
-				<form method="POST">
+				<form method="POST" enctype="multipart/form-data">
 					<table border=1>
 						<tbody>
 							<tr>
@@ -63,7 +63,8 @@
 									{% else %}
 									<img id="profile-pic" src="/images/alien-head.jpg">		
 									{% endif %}
-							
+									<br>
+									<input type="file" name="image">							
 								</td>
 								<td>
 									<div id="profile-name">{{profile.username}}</div>
