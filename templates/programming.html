@@ -51,38 +51,43 @@
 				  <li class="last"><a href="/gallery" title="Photo Gallery">Gallery</a></li>
 			  </ul>
 			</nav>
-			
-		{% if user %}
-		<section id="new-post">
-			<form action="/newpost" method="GET">
-				<button class="button" id="submit">New Post</button>
-			</form>
-		</section>
-		{% endif %}
-		<section id="content">
-			<ol>
-				{% for post in posts%}
+			<section id="content">
+				<ol>
 					<li><article class="entry">
-						{% if user %}
-						{% if user.key().id() == post.user or user.isadmin%}
-						<form method="POST" action="/deletepost">
-							<input type="hidden" name="post" value="{{post.key().id()}}">
-							<a class="remove-button" href="#" onclick="parentNode.submit()"></a>				
-						</form>
-						<a class="edit-button" href="/editpost/{{post.key().id()}}"></a>
-						{% endif %}
-						{% endif %}
-						<hgroup>
-							<h2>{{post.subject}}</h2>
-							<h3>Created by: {{post.username}}</h3>
-							<h3>Date: {{post.created}}</h3>
-						</hgroup>
-						<hr>
-						<p>{{post.content}}</p>
-					</article></li>			
-				{% endfor %}
-			</ol>
-		</section>
+						<h2>Programming Team (System Controls)</h2>
+						<p>The Programming Subteam of the ERHS Engineering Club
+						is responsible for a wide variety of functions of the 
+						team.  Under the Programming/System Controls Subteam there
+						are several miniteams.  These include Software Engineering,
+						and Electrical Engineering.  Additionally, the programming
+						team works with the business team to help develop the club
+						website.</p>
+					</article></li>
+					<li><article class="entry">
+						<h2>Software Engineering</h2>
+						<p>The largest and most important part of System Controls is
+						software engineering.  The programmers are in charge of making 
+						the robot able to move.  Some goals of the software engineering
+						department are to develop stable drive code, develop code to control
+						end effectors, and develop artificial intelligence systems.</p>
+					</article></li>
+					<li><article class="entry">
+						<h2>Electrical Engineering</h2>
+						<p>The electrical engineering department's primary responsibility
+						is wiring physical components.  We put a major emphasis on making
+						sure the wiring is neat, organized, and most importantly, SAFE.</p>
+					</article></li>
+				</ol>
+			</section>
+		    <aside id="media-display">
+				<hgroup>
+					<h2>Visit the Programming Youtube Channel</h2>
+					<h3><a href="http://www.youtube.com/erhs53hackers">ERHS 53 Hackers Channel</a></h3>
+				</hgroup>
+				<figure>
+					<iframe src="" allowfullscreen></iframe>
+				</figure>
+			</aside>
 			<footer id="contentinfo">
 				<address id="about">
 					<span class="primary">
