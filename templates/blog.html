@@ -59,29 +59,25 @@
 			</form>
 		</section>
 		{% endif %}
-		<section id="content">
-			<ol>
+		<section id="blog">
 				{% for post in posts%}
-					<li><article class="entry">
+					<div id="blog-entry">
 						{% if user %}
 						{% if user.key().id() == post.user or user.isadmin%}
-						<form method="POST" action="/deletepost">
-							<input type="hidden" name="post" value="{{post.key().id()}}">
-							<a class="remove-button" href="#" onclick="parentNode.submit()"></a>				
-						</form>
-						<a class="edit-button" href="/editpost/{{post.key().id()}}"></a>
+							<form method="POST" action="/deletepost">
+								<input type="hidden" name="post" value="{{post.key().id()}}">
+								<a class="remove-button" href="#" onclick="parentNode.submit()"></a>				
+							</form>
+							<a class="edit-button" href="/editpost/{{post.key().id()}}"></a>
 						{% endif %}
 						{% endif %}
-						<hgroup>
-							<h2>{{post.subject}}</h2>
-							<h3>Created by: {{post.username}}</h3>
-							<h3>Date: {{post.created}}</h3>
-						</hgroup>
+						<h2>{{post.subject}}</h2>
+						<h3>Created by: {{post.username}}</h3>
+						<h3>Date: {{post.created}}</h3>
 						<hr>
 						<p>{{post.content}}</p>
-					</article></li>			
+					</div>
 				{% endfor %}
-			</ol>
 		</section>
 			<footer id="contentinfo">
 				<address id="about">
