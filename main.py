@@ -72,7 +72,10 @@ class LogoutHandler(Handler):
 class MembersHandler(Handler):
      def get(self):        
         self.login()
-        self.render("members.html", user = self.user)
+        
+        members = db.GqlQuery("SELECT * FROM User")
+        
+        self.render("members.html", user = self.user, users=members, display="none")
         
 
      def post(self):
@@ -104,7 +107,8 @@ class MembersHandler(Handler):
 
             if v_user and v_pass and v_verify and v_email and v_existing_user < 1:
                 password = make_pw_hash(username, password)
-                newuser = User(username=username, password=password, email = email, isadmin=False, userimage=image)
+                newuser = User(username=username, password=password, email = email, isadmin=False)
+                if image: newuser.userimage = image
                 newuser.put()
                 user_id = make_secure_val(str(newuser.key().id()))
                 self.response.headers.add_header('Set-Cookie', 'user_id=%s' % user_id)
@@ -119,13 +123,15 @@ class MembersHandler(Handler):
                 if not v_verify: m_verify = 'passwords do not match.'
                 if not v_email: m_email = 'not a valid email.'
                 if v_existing_user > 0: m_user = 'That user already exists.'
-                
+                members = db.GqlQuery("SELECT * FROM User")
                 self.render("members.html", user = self.user,
                             email = m_email,
                             username = m_user,
                             password =  m_pass,
                             verify = m_verify,
-                            mail = email)
+                            mail = email,
+                            display = "block",
+                            users=members)
 
 class NewpostHandler(Handler):
     def render_form(self, subject="", content="", error="",user=None):

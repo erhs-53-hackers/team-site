@@ -56,11 +56,12 @@
 			  </ul>
 			</nav>
 			
-		{% if user.isadmin %}
+		
 		
 		<section id="members">
+		{% if user.isadmin %}
 			<button id="createuserbutton" type="button">Create User</button>			
-			<form id="createuser" style="display: none;" method="post" enctype="multipart/form-data">
+			<form id="createuser" style="display: {{display}};" method="post" enctype="multipart/form-data">
 			<table>
 				<tr>
 				  <td class="label">
@@ -132,9 +133,26 @@
 			 );
 			 })(jQuery);
 		</script>
-			
+		<br><br>
+		{% endif %}
+		
+		{% for user in users %}
+		<div style="display: inline-block; float:left; width:280px; height:125px; padding:10px; padding-bottom:40px;">
+		<fieldset style="border-color: white;">
+		<legend><a href="/profile/{{user.username}}">{{user.username}}</a></legend>
+		{% if user.userimage %}
+		<img align="left" style="width:50%; height:100%;" src="/image?id={{user.key()}}">
+		{% else %}
+		<img align="left" style="width:50%; height:100%;" src="/images/alien-head.jpg">
+		{% endif %}		
+		{% if user.quote %}
+		<font size="2">"{{user.quote}}"</font>
+		{% endif %}
+		</fieldset>
+		</div>		
+		{% endfor %}
 		</section><!-- /#content -->			
-		{% endif %}	
+			
 			<footer id="contentinfo">
 				<address id="about">
 					<span class="primary">
