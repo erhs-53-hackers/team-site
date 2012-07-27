@@ -268,11 +268,11 @@ class EditProfileHandler(Handler):
                 
                 if profile.team == "Programming":
                     prog = 'selected="selected"'
-                elif profile.team == "Mecanical":
+                elif profile.team == "Mechanical":
                     mec  = 'selected="selected"'
                 elif profile.team == "Outreach":
                     out  = 'selected="selected"'
-                elif profile.team == "Managment":
+                elif profile.team == "Management":
                     mang = 'selected="selected"'
                     
                 currentProjects = ""
