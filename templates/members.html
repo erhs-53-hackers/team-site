@@ -51,7 +51,7 @@
 	{% for user in users %}
 		<div id="member-block">
 			<fieldset style="border-color: white;">			
-				<legend><a href="/profile/{{user.username}}">{{user.username}} {{loop.index}}</a></legend>
+				<legend><a href="/profile/{{user.username}}">{{user.username}}</a></legend>
 				{% if user.userimage %}
 				<img align="left" style="width:50%; height:100%;" src="/image?id={{user.key()}}">
 				{% else %}
