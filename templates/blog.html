@@ -1,4 +1,14 @@
 {% extends "base.html" %}
+{% block head %}
+	{{super()}}
+	<script type="text/javascript">
+		function confirmDel(id) {
+			if(window.confirm("Are you sure you want to delete this post?")) {
+				document.forms["deletepost"+id].submit();			
+			}			
+		}
+	</script>
+{% endblock %}
 {% block content %}
 	{% if user %}
 	<section id="new-post">
@@ -12,9 +22,9 @@
 				<div id="blog-entry">
 					{% if user %}
 					{% if user.key().id() == post.user or user.isadmin%}
-						<form method="POST" action="/deletepost">
+						<form method="POST" action="/deletepost" id="deletepost{{user.key().id()}}">
 							<input type="hidden" name="post" value="{{post.key().id()}}">
-							<a class="remove-button" href="#" onclick="parentNode.submit()"></a>				
+							<a class="remove-button" href="#" onclick="confirmDel({{user.key().id()}})"></a>				
 						</form>
 						<a class="edit-button" href="/editpost/{{post.key().id()}}"></a>
 					{% endif %}
