@@ -16,7 +16,13 @@
 					
 					</td>
 					<td>
-						<div id="profile-name">{{profile.username}}</div>
+						<div id="profile-name">
+							{% if profile.fullname %}
+								{{profile.fullname}} ({{profile.username}})
+								{% else %}
+								{{profile.username}}
+							{% endif %}
+						</div>
 					</td>					
 				</tr>
 				{% if profile.quote %}

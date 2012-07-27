@@ -85,6 +85,8 @@ class MembersHandler(Handler):
             verify = self.request.get('verify')
             email = self.request.get('email')
             image = self.request.get('image')
+            fullname = self.request.get('fullname')
+            
             if image:
                 image = images.resize(image, 300, 300)
                 image = db.Blob(image)
@@ -108,6 +110,7 @@ class MembersHandler(Handler):
                 password = make_pw_hash(username, password)
                 newuser = User(username=username, password=password, email = email, isadmin=False)
                 if image: newuser.userimage = image
+                if fullname: newuser.fullname = fullname
                 newuser.put()                
                 self.redirect('/members')
             else:
@@ -127,6 +130,7 @@ class MembersHandler(Handler):
                             password =  m_pass,
                             verify = m_verify,
                             mail = email,
+                            fullname = fullname,
                             display = "block",
                             users=members)
 
@@ -311,6 +315,7 @@ class EditProfileHandler(Handler):
             pastProjs    = self.request.get("pastProjects")
             email        = self.request.get("email")
             image        = self.request.get("image")
+            fullname     = self.request.get("fullname") 
             
             if image:
                 image = images.resize(image, 300, 300)
@@ -328,7 +333,9 @@ class EditProfileHandler(Handler):
             profile.team            = team
             profile.currentProjects = currentProjs
             profile.pastProjects    = pastProjs
-            profile.email           = email            
+            profile.email           = email
+            
+            if fullname: profile.fullname = fullname
             if image: profile.userimage = image
             
             profile.put()

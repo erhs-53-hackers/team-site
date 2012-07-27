@@ -24,6 +24,7 @@ class User(db.Model):
     quote           = db.TextProperty()
     userimage       = db.BlobProperty()
     username        = db.StringProperty(required = True)
+    fullname        = db.StringProperty()
     password        = db.StringProperty(required = True)
     email           = db.StringProperty()
     isadmin         = db.BooleanProperty(required = True)
