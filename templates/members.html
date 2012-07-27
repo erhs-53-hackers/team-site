@@ -5,14 +5,12 @@
 		<title>Eleanor Roosevelt Engineering and Robotics</title>
 		<link rel="stylesheet" href="../css/main.css">
 		<link rel="stylesheet" href="../css/nav.css">
-		<link rel="stylehseet" href="../css/banner.css">
+		<link rel="stylesheet" href="../css/members.css">
 		<script type="text/javascript" src="../js/jquery.js"></script>
 		<script src="../js/modernizr.js"></script>
 		<!--[if IE]>
 			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		
-			
 	</head>
 	<body class="no-js">
 		<div id="container">
@@ -55,104 +53,66 @@
 				  <li class="last"><a href="/gallery" title="Photo Gallery">Gallery</a></li>
 			  </ul>
 			</nav>
-			
-		
-		
-		<section id="members">
-		{% if user.isadmin %}
-			<button id="createuserbutton" type="button">Create User</button>			
-			<form id="createuser" style="display: {{display}};" method="post" enctype="multipart/form-data">
-			<table>
-				<tr>
-				  <td class="label">
-				  	User Image				  	
-				  </td>
-				  <td>
-				  	<input type="file" name="image">
-				  </td>
-				</tr>
-				<tr>
-				  <td class="label">
-					Username
-				  </td>
-				  <td>
-					<input type="text" name="username" value="{{name}}">
-				  </td>
-				  <td>
-					{{username}}
-				  </td>
-				</tr>
-
-				<tr>
-				  <td class="label">
-					Password
-				  </td>
-				  <td>
-					<input type="password" name="password" value="">
-				  </td>
-				  <td>
-					{{password}}
-				  </td>
-				</tr>
-
-				<tr>
-				  <td class="label">
-					Verify Password
-				  </td>
-				  <td>
-					<input type="password" name="verify" value="">
-				  </td>
-				  <td>
-					{{verify}}
-				  </td>
-				</tr>
-
-				<tr>
-				  <td class="label">
-					Email (optional)
-				  </td>
-				  <td>
-					<input type="text" name="email" value="{{mail}}">
-				  </td>
-				  <td>
-					{{email}}
-				  </td>
-				</tr>
-			</table>
-
-			<input type="submit">
-			</form>
-			<script>
-			
-			(function($){
-			$("#createuserbutton").toggle(function(){
-					$("#createuser").show('medium');
-			 	}, function(){
-			   		$("#createuser").hide('fast');
-			 	}
-			 );
-			 })(jQuery);
-		</script>
-		<br><br>
-		{% endif %}
-		
-		{% for user in users %}
-		<div style="display: inline-block; float:left; width:280px; height:125px; padding:10px; padding-bottom:40px;">
-		<fieldset style="border-color: white;">
-		<legend><a href="/profile/{{user.username}}">{{user.username}}</a></legend>
-		{% if user.userimage %}
-		<img align="left" style="width:50%; height:100%;" src="/image?id={{user.key()}}">
-		{% else %}
-		<img align="left" style="width:50%; height:100%;" src="/images/alien-head.jpg">
-		{% endif %}		
-		{% if user.quote %}
-		<font size="2">"{{user.quote}}"</font>
-		{% endif %}
-		</fieldset>
-		</div>		
-		{% endfor %}
-		</section><!-- /#content -->			
-			
+			<section id="members">
+			{% if user.isadmin %}
+				<button id="createuserbutton" type="button">Create User</button>			
+				<form id="createuser" style="display: {{display}};" method="post" enctype="multipart/form-data">
+					<table>
+						<tr>
+						  <td class="label">User Image</td>
+						  <td><input type="file" name="image"></td>
+						</tr>
+						<tr>
+						  <td class="label">Username</td>
+						  <td><input type="text" name="username" value="{{name}}"></td>
+						  <td>{{username}}</td>
+						</tr>
+						<tr>
+						  <td class="label">Password</td>
+						  <td><input type="password" name="password" value=""></td>
+						  <td>{{password}}</td>
+						</tr>
+						<tr>
+						  <td class="label">Verify Password</td>
+						  <td><input type="password" name="verify" value=""></td>
+						  <td>{{verify}}</td>
+						</tr>
+						<tr>
+						  <td class="label">Email (optional)</td>
+						  <td><input type="text" name="email" value="{{mail}}"></td>
+						  <td>{{email}}</td>
+						</tr>
+					</table>
+				<input type="submit">
+				</form>
+				<script>
+					(function($){
+					$("#createuserbutton").toggle(function(){
+							$("#createuser").show('medium');
+						}, function(){
+							$("#createuser").hide('fast');
+						}
+					 );
+					 })(jQuery);
+				</script>
+				<br><br>
+			{% endif %}
+			{% for user in users %}
+				<div id="member-block">
+					<fieldset style="border-color: white;">
+						<legend><a href="/profile/{{user.username}}">{{user.username}}</a></legend>
+						{% if user.userimage %}
+						<img align="left" style="width:50%; height:100%;" src="/image?id={{user.key()}}">
+						{% else %}
+						<img align="left" style="width:50%; height:100%;" src="../images/alien-head.jpg">
+						{% endif %}		
+						{% if user.quote %}
+						<p align="right" style="width:45%; height:100%;">"{{user.quote}}"</p>
+						{% endif %}
+					</fieldset>
+				</div>		
+			{% endfor %}
+			</section>			
 			<footer id="contentinfo">
 				<address id="about">
 					<span class="primary">
