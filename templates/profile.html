@@ -1,160 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>Eleanor Roosevelt Engineering and Robotics</title>
-		<link rel="stylesheet" href="../css/main.css">
-		<link rel="stylesheet" href="../css/nav.css">
-		<link rel="stylehseet" href="../css/banner.css">
-		<!--[if IE]>
-			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-	</head>
-	<body class="no-js">
-		<div id="container">
-			<aside id="login">
-				{% if user %}		
-				<div align="right"><a class="profile-link" href="/profile/{{user.username}}">{{user.username}}</a>(<a href="/logout">logout</a>)</div>
-				{% else %}
-				<div align="right"><a href="/login">User Login</a></div>
+{% extends "base.html" %}
+{% block content %}
+	<section id="content">
+		{% if user and profile.key().id() == user.key().id() %}
+		<a class="edit-button" href="/editprofile/{{profile.username}}" title="edit"></a>
+		{% endif %}
+		<table border=1>		
+			<tbody>
+				<tr>
+					<td rowspan="2">
+						{% if profile.userimage %}
+						<img id="profile-pic" src="/image?id={{profile.key()}}">
+						{% else %}
+						<img id="profile-pic" src="/images/alien-head.jpg">		
+						{% endif %}
+					
+					</td>
+					<td>
+						<div id="profile-name">{{profile.username}}</div>
+					</td>					
+				</tr>
+				{% if profile.quote %}
+				<tr>
+					<td>
+					{{profile.quote}}
+					</td>
+				</tr>
 				{% endif %}
-			</aside>
-			<header id="banner">
-				<a href="/"><img src="../images/logo/banner.gif"></a>
-			</header>
-			<script>
-				var el = document.getElementsByTagName("body")[0];
-				el.className = "";
-			</script>
-			<noscript>
-				<!--[if IE]>
-					<link rel="stylesheet" href="../css/ie.css">
-				<![endif]-->
-			</noscript>
-			<nav id="topNav">
-				<ul>
-					<li><a href="/" title="Home">Home</a></li>
-					<li><a href="/about" title="About">About</a>
-						<ul>
-							<li><a href="/team-history" title="Team History">Team History</a></li>
-							<li><a href="/first" title="FIRST">FIRST</a></li>
-							<li><a href="/mechanical" title="Mechanical Team">Mechanical Team</a></li>
-							<li><a href="/programming" title="Programming Team">Programming Team</a></li>
-							<li class="last"><a href="/about-site" title="Website">Website</a></li>
-						</ul>        
-					</li>
-				  <li><a href="/blog" title="Blog">Blog</a></li>
-				  <li><a href="/contact" title="Contact">Contact</a></li>
-				  <li><a href="/sponsors" title="Sponsors">Sponsors</a></li>
-				  <li><a href="/calendar" title="Calendar">Calendar</a></li>
-				  <li><a href="/members" title="Members">Members</a></li>
-				  <li class="last"><a href="/gallery" title="Photo Gallery">Gallery</a></li>
-			  </ul>
-			</nav>
-			<section id="content">
-				{% if user and profile.key().id() == user.key().id() %}
-				<a class="edit-button" href="/editprofile/{{profile.username}}" title="edit"></a>
+				{% if profile.team %}
+				<tr>
+					<td colspan="2">
+					Team: {{ profile.team }}
+					</td>
+				</tr>
 				{% endif %}
-				<table border=1>		
-					<tbody>
-						<tr>
-							<td rowspan="2">
-								{% if profile.userimage %}
-								<img id="profile-pic" src="/image?id={{profile.key()}}">
-								{% else %}
-								<img id="profile-pic" src="/images/alien-head.jpg">		
-								{% endif %}
-							
-							</td>
-							<td>
-								<div id="profile-name">{{profile.username}}</div>
-							</td>					
-						</tr>
-						{% if profile.quote %}
-						<tr>
-							<td>
-							{{profile.quote}}
-							</td>
-						</tr>
-						{% endif %}
-						{% if profile.team %}
-						<tr>
-							<td colspan="2">
-							Team: {{ profile.team }}
-							</td>
-						</tr>
-						{% endif %}
-						{% if profile.currentProjects %}
-						<tr>
-							<td colspan="2">
-							Current project(s): {{profile.currentProjects[0]}}
-							{% for project in profile.currentProjects[1:] %}
-							, {{project}}
-							{% endfor %}
-							</td>
-						</tr>
-						{% endif %}
-						{% if profile.pastProjects %}
-						<tr>
-							<td colspan="2">
-							Past projects: {{profile.pastProjects[0]}}
-							{% for project in profile.pastProjects[1:] %}
-							, {{project}}
-							{% endfor %}
-							</td>
-						</tr>
-						{% endif %}	
-						{% if user and profile.email %}
-						<tr>
-							<td colspan="2">
-							Email: {{profile.email}}
-							</td>							
-						</tr>
-						{% endif %}		
-					</tbody>
-				</table>
-			</section>
-			
-		
-			<footer id="contentinfo">
-				<address id="about">
-					<span class="primary">
-						<strong>Eleanor Roosevelt</strong>Engineering Team
-					</span><!-- /.primary -->	
-					<span class="bio">
-						The Eleanor Roosevelt Engineering Teams website offers 
-						information to team members, mentors, parents, and the public.  
-						The website is built and maintained by student members of the team.
-					</span><!-- /.bio -->
-				</address><!-- /#about -->
-				<p><a href="http://www.team53.org/">ERHS Engineering</a> | 2012</p>
-			</footer><!-- /#contentinfo -->
-			<script src="../js/jquery.js"></script>
-			<script src="../js/modernizr.js"></script>
-	        <script>
-			(function($){
-				
-				//cache nav
-				var nav = $("#topNav");
-				
-				//add indicator and hovers to submenu parents
-				nav.find("li").each(function() {
-					if ($(this).find("ul").length > 0) {
-						$("<span>").text("^").appendTo($(this).children(":first"));
-
-						//show subnav on hover
-						$(this).mouseenter(function() {
-							$(this).find("ul").stop(true, true).slideDown();
-						});
-						
-						//hide submenus on exit
-						$(this).mouseleave(function() {
-							$(this).find("ul").stop(true, true).slideUp();
-						});
-					}
-				});
-			})(jQuery);
-		    </script>
-		</div>
-	</body>
-</html>
+				{% if profile.currentProjects %}
+				<tr>
+					<td colspan="2">
+					Current project(s): {{profile.currentProjects[0]}}
+					{% for project in profile.currentProjects[1:] %}
+					, {{project}}
+					{% endfor %}
+					</td>
+				</tr>
+				{% endif %}
+				{% if profile.pastProjects %}
+				<tr>
+					<td colspan="2">
+					Past projects: {{profile.pastProjects[0]}}
+					{% for project in profile.pastProjects[1:] %}
+					, {{project}}
+					{% endfor %}
+					</td>
+				</tr>
+				{% endif %}	
+				{% if user and profile.email %}
+				<tr>
+					<td colspan="2">
+					Email: {{profile.email}}
+					</td>							
+				</tr>
+				{% endif %}		
+			</tbody>
+		</table>
+	</section>
+{% endblock %}

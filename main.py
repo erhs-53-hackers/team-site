@@ -105,10 +105,8 @@ class MembersHandler(Handler):
                 password = make_pw_hash(username, password)
                 newuser = User(username=username, password=password, email = email, isadmin=False)
                 if image: newuser.userimage = image
-                newuser.put()
-                user_id = make_secure_val(str(newuser.key().id()))
-                self.response.headers.add_header('Set-Cookie', 'user_id=%s' % user_id)
-                self.redirect('/')
+                newuser.put()                
+                self.redirect('/members')
             else:
                 m_user = ''
                 m_pass = ''
