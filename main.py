@@ -344,8 +344,22 @@ class EditProfileHandler(Handler):
         else:
             self.redirect("/login")
             
+class DeleteUserHandler(Handler):
+    def post(self):
+        self.login()
+        del_user = self.request.get("user")
+        if self.user and self.user.isadmin:
+            if del_user.isdigit():
+                del_user = User.get_by_id(int(del_user))
+                if del_user:
+                    del_user.delete()
+                self.redirect("/members")
+        else:
+            self.redirect("/login")
         
-       
+        
+                  
+
                 
         
         
@@ -367,5 +381,6 @@ app = webapp2.WSGIApplication([('/', MainHandler),
                                ('/about', AboutHandler),
                                ('/profile/(.+)', ProfileHandler),
                                ('/editprofile/(.+)', EditProfileHandler),
-                               ('/programming', ProgrammingHandler)],
+                               ('/programming', ProgrammingHandler),
+                               ('/deleteuser', DeleteUserHandler)],
                                debug=True)

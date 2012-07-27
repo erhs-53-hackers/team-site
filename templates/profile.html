@@ -1,6 +1,22 @@
 {% extends "base.html" %}
+{% block head %}
+	{{super()}}
+	<script type="text/javascript">
+		function confirmDel(id) {
+			if(window.confirm("Are you sure you want to delete this user?")) {
+				document.forms["deleteuser"+id].submit();			
+			}			
+		}
+	</script>
+{% endblock %}	
 {% block content %}
 	<section id="content">
+		{% if user.isadmin %}
+		<form method="POST" action="/deleteuser" id="deleteuser{{profile.key().id()}}">
+			<input type="hidden" name="user" value="{{profile.key().id()}}">
+			<a class="remove-button" href="#" onclick="confirmDel({{profile.key().id()}})"></a>				
+		</form>
+		{% endif %}
 		{% if user and profile.key().id() == user.key().id() %}
 		<a class="edit-button" href="/editprofile/{{profile.username}}" title="edit"></a>
 		{% endif %}
