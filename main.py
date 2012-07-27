@@ -70,6 +70,9 @@ class MembersHandler(Handler):
         self.login()
         
         members = db.GqlQuery("SELECT * FROM User")
+        members = list(members)    
+        members = sorted(members, key=lambda member: member.username.lower())
+       
         
         self.render("members.html", user = self.user, users=members, display="none")
         
