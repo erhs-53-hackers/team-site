@@ -258,6 +258,24 @@ class ProfileHandler(Handler):
             self.error(404)
             
 class EditProfileHandler(Handler):
+    def genCurrentProjects(self, profile):
+        currentProjects = ""                                
+        for i in range(len(profile.currentProjects)):
+            if i == 0:
+                currentProjects += profile.currentProjects[i]
+            else:
+                currentProjects += ", " + profile.currentProjects[i]
+        return currentProjects
+    
+    def genPastProjects(self, profile):
+        pastProjects = ""                                
+        for i in range(len(profile.pastProjects)):
+            if i == 0:
+                pastProjects += profile.pastProjects[i]
+            else:
+                pastProjects += ", " + profile.pastProjects[i]
+        return pastProjects       
+    
     def get(self, res):
         self.login()
         profile = db.GqlQuery("SELECT * FROM User WHERE username=:1 LIMIT 1", res)
@@ -279,26 +297,13 @@ class EditProfileHandler(Handler):
                 elif profile.team == "Management":
                     mang = 'selected="selected"'
                     
-                currentProjects = ""
-                                
-                for i in range(len(profile.currentProjects)):
-                    if i == 0:
-                        currentProjects += profile.currentProjects[i]
-                    else:
-                        currentProjects += ", " + profile.currentProjects[i]
-                        
-                pastProjects = ""
-                                
-                for i in range(len(profile.pastProjects)):
-                    if i == 0:
-                        pastProjects += profile.pastProjects[i]
-                    else:
-                        pastProjects += ", " + profile.pastProjects[i]
-                    
+                currentProjects = self.genCurrentProjects(profile)
+                pastProjects    = self.genPastProjects(profile)
+                
                 
                 self.render("editprofile.html", user = self.user, profile = profile,
                             currentProjects=currentProjects ,pastProjects=pastProjects,
-                            prog=prog, mec=mec, out=out, mang=mang)
+                            prog=prog, mec=mec, out=out, mang=mang, display="none")
             else:
                 self.redirect("/login")
         else:
@@ -315,7 +320,10 @@ class EditProfileHandler(Handler):
             pastProjs    = self.request.get("pastProjects")
             email        = self.request.get("email")
             image        = self.request.get("image")
-            fullname     = self.request.get("fullname") 
+            fullname     = self.request.get("fullname")
+            oldpass      = self.request.get("oldpass")
+            newpass      = self.request.get("newpass")
+            v_newpass    = self.request.get("v_newpass")
             
             if image:
                 image = images.resize(image, 300, 300)
@@ -338,9 +346,48 @@ class EditProfileHandler(Handler):
             if fullname: profile.fullname = fullname
             if image: profile.userimage = image
             
-            profile.put()
+            succsess = True
+            if oldpass:
+                v_old   = valid_pw(profile.username, oldpass, profile.password)
+                v_valid = match(PASS, newpass)
+                v_match = newpass == v_newpass
+                if v_old and v_valid and v_match:
+                    password = make_pw_hash(profile.username, newpass)
+                    profile.password = password
+                else:
+                    succsess = False
+                    m_old   = "incorrect password"
+                    m_valid = "not a valid password"
+                    m_match = "the passwords do not match"
+                    if v_old:   m_old   = ""
+                    if v_valid: m_valid = ""
+                    if v_match: m_match = ""
+                    currentProjects = self.genCurrentProjects(profile)
+                    pastProjects    = self.genPastProjects(profile)
+                    prog = ""
+                    mec  = ""
+                    out  = ""
+                    mang = ""
+                    
+                    if profile.team == "Programming":
+                        prog = 'selected="selected"'
+                    elif profile.team == "Mechanical":
+                        mec  = 'selected="selected"'
+                    elif profile.team == "Outreach":
+                        out  = 'selected="selected"'
+                    elif profile.team == "Management":
+                        mang = 'selected="selected"'
+                        
+                    self.render("editprofile.html", user = self.user, profile = profile,
+                            currentProjects=currentProjects ,pastProjects=pastProjects,
+                            prog=prog, mec=mec, out=out, mang=mang, display="block",
+                            old_err=m_old, valid_err=m_valid, match_err=m_match)                 
+                        
+                
             
-            self.redirect("/profile/%s" % res)
+            if succsess:
+                profile.put()
+                self.redirect("/profile/%s" % res)
         else:
             self.redirect("/login")
             
