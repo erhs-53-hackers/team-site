@@ -404,7 +404,30 @@ class DeleteUserHandler(Handler):
         else:
             self.redirect("/login")
         
+class TeamHistoryHandler(Handler):
+    def get(self):
+        self.login()
+        self.render("teamhistory.html", user = self.user)
         
+class FirstHandler(Handler):
+    def get(self):
+        self.login()
+        self.render("first.html", user = self.user)
+
+class MechanicalHandler(Handler):
+    def get(self):
+        self.login()
+        self.render("mechanical.html", user = self.user)
+        
+class WebsiteHandler(Handler):
+    def get(self):
+        self.login()
+        self.render("about-site.html", user = self.user)
+        
+class GalleryHandler(Handler):
+    def get(self):
+        self.login()
+        self.render("gallery.html", user = self.user)
                   
 
                 
@@ -429,5 +452,10 @@ app = webapp2.WSGIApplication([('/', MainHandler),
                                ('/profile/(.+)', ProfileHandler),
                                ('/editprofile/(.+)', EditProfileHandler),
                                ('/programming', ProgrammingHandler),
-                               ('/deleteuser', DeleteUserHandler)],
+                               ('/deleteuser', DeleteUserHandler),
+                               ('/team-history', TeamHistoryHandler),
+                               ('/first',FirstHandler),
+                               ('/mechanical', MechanicalHandler),
+                               ('/about-site', WebsiteHandler),
+                               ('/gallery', GalleryHandler)],
                                debug=True)
