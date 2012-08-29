@@ -4,7 +4,7 @@ import random
 import hashlib
 import string
 
-SECRET = "ihgewlrkgjncw;nhgjew,cg;xngm4ouhygt2o5ut90587094tu cxn3moqx,lgnwmvznjhbgIG BODIYNGOhp4typ8 y ugIOUYbtro86 k"
+SECRET = "devel secret"
 
 USER  = re.compile(r"^[a-zA-Z0-9_-]{3,20}$")
 PASS  = re.compile(r"^.{3,20}$")
